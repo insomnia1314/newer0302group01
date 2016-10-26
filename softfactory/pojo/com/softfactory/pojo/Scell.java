@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 库存单元实体类
+ * 库存单元实体类  实体实现
  * 
  * @author zhouyelong
  * 
