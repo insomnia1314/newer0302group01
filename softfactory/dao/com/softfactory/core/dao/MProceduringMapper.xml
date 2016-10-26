@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softfactory.core.dao.MProceduringMapper">
+
+
+
+	<resultMap type="com.softfactory.pojo.MProceduring" id="MPMap">
+		<id property="mPMId" column="ID" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="detailsNumber" column="DETAILS_NUMBER" />
+		<result property="procedureId" column="PROCEDURE_ID" />
+		<result property="procedureName" column="PROCEDURE_NAME" />
+		<result property="labourHourAmount" column="LABOUR_HOUR_AMOUNT" />
+		<result property="costPrice" column="COST_PRICE" />
+		<result property="subtotal" column="SUBTOTAL" />
+		<result property="procedureDescribe" column="PROCEDURE_DESCRIBE" />
+		<result property="regCount" column="REG_COUNT" />
+		<result property="procedureResponsiblePerson" column="PROCEDURE_RESPONSIBLE_PERSON" />
+		<result property="register" column="REGISTER" />
+		<result property="registerTime" column="REGISTER_TIME" />
+		<result property="checker" column="CHECKER" />
+		<result property="checkTime" column="CHECK_TIME" />
+	</resultMap>
+
+	<sql id="pageSQLHead">
+		select *
+		from (select row_number()
+		over(
+	</sql>
+	<!-- 分页原先 /* * select PARENT_ID parentId,DETAILS_NUMBER detailsNumber,PROCEDURE_ID 
+		procedureId,PROCEDURE_NAME ProcedureName, LABOUR_HOUR_AMOUNT labourHourAmount,COST_PRICE 
+		costPrice,SUBTOTAL subtotal, PROCEDURE_DESCRIBE procedureDescribe, REG_COUNT 
+		regCount, PROCEDURE_RESPONSIBLE_PERSON procedureResponsiblePerson, REGISTER 
+		register,REGISTER_TIME registerTime,CHECKER checker ,CHECK_TIME checkerTime 
+		* from (select row_number() over(order by ID) rn, MP.* from M_PROCEDURING 
+		MP WHERE 1=1) * WHERE RN>PAGE AND RN<=PAGESIZE */ -->
+	<sql id="orderBy">
+		<if test="sort != null and order != null">
+			order by
+			<choose>
+				<when test="sort == 'mPMId'">ID</when>
+				<when test="sort == 'parentId'">PARENT_ID</when>
+				<when test="sort == 'detailsNumber'">DETAILS_NUMBER</when>
+				<when test="sort == 'procedureId'">PROCEDURE_ID</when>
+				<when test="sort == 'ProcedureName'">PROCEDURE_NAME</when>
+				<when test="sort == 'labourHourAmount'">LABOUR_HOUR_AMOUNT</when>
+				<when test="sort == 'costPrice'">COST_PRICE</when>
+				<when test="sort == 'amount'">AMOUNT</when>
+				<when test="sort == 'subtotal'">SUBTOTAL</when>
+				<when test="sort == 'procedureDescribe'">PROCEDURE_DESCRIBE</when>
+				<when test="sort == 'regCount'">REG_COUNT</when>
+				<when test="sort == 'procedureResponsiblePerson'">PROCEDURE_RESPONSIBLE_PERSON</when>
+				<when test="sort == 'register'">REGISTER</when>
+				<when test="sort == 'registerTime'">REGISTER_TIME</when>
+				<when test="sort == 'checker'">CHECKER</when>
+				<when test="sort == 'checkTime'">checker_Time</when>
+				<otherwise>
+					ID
+				</otherwise>
+			</choose>
+			<if test="order == 'asc'">asc</if>
+			<if test="order == 'desc'">desc</if>
+		</if>
+	</sql>
+
+	<sql id="WhereClase">
+		<where>
+			1=1
+		</where>
+	</sql>
+
+	<sql id="pageSQLFoot">
+    <![CDATA[ ) where rn > #{page} and rn <= #{pagesize} ]]>
+	</sql>
+
+	<select id="findPager" resultMap="MPMap">
+		<include refid="pageSQLHead" />
+		<include refid="orderBy" />
+		) rn,MP.* from M_PROCEDURING MP
+		<include refid="WhereClase" />
+		<include refid="pageSQLFoot" />
+	</select>
+
+
+	<select id="findPagerTotal" resultType="long">
+		select count(id) from M_PROCEDURING MP
+		<include refid="WhereClase" />
+	</select>
+</mapper>

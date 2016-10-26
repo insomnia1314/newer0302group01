@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softfactory.core.dao.MProcedureModulingMapper">
+
+	<resultMap type="com.softfactory.pojo.MProcedureModuling" id="MPMMap">
+		<id property="mPId" column="ID" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="detailsNumber" column="DETAILS_NUMBER" />
+		<result property="producId" column="PRODUCT_ID" />
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="costPrice" column="COST_PRICE" />
+		<result property="amount" column="AMOUNT" />
+		<result property="subtotal" column="SUBTOTAL" />
+	</resultMap>
+
+	<sql id="pageSQLHead">
+		select ID mPId,PARENT_ID parentId,DETAILS_NUMBER
+		detailsNumber,PRODUCT_ID
+		producId,PRODUCT_NAME productName,COST_PRICE
+		costPrice,AMOUNT
+		amount,SUBTOTAL
+		subtotal
+		from (select row_number()
+		over(
+	</sql>
+
+	<sql id="orderBy">
+		<if test="sort != null and order != null">
+			order by
+			<choose>
+				<when test="sort == 'mPId'">ID</when>
+				<when test="sort == 'parentId'">PARENT_ID</when>
+				<when test="sort == 'detailsNumber'">DETAILS_NUMBER</when>
+				<when test="sort == 'producId'">PRODUCT_ID</when>
+				<when test="sort == 'productName'">PRODUCT_NAME</when>
+				<when test="sort == 'costPrice'">COST_PRICE</when>
+				<when test="sort == 'amount'">AMOUNT</when>
+				<when test="sort == 'subtotal'">SUBTOTAL</when>
+				<otherwise>
+					ID
+				</otherwise>
+			</choose>
+			<if test="order == 'asc'">asc</if>
+			<if test="order == 'desc'">desc</if>
+		</if>
+	</sql>
+
+	<sql id="WhereClase">
+		<where>
+			1=1
+		</where>
+	</sql>
+
+	<sql id="pageSQLFoot">
+    <![CDATA[ ) where rn > #{page} and rn <= #{pagesize} ]]>
+	</sql>
+
+	<select id="findPager" resultMap="MPMMap">
+		<include refid="pageSQLHead" />
+		<include refid="orderBy" />
+		) rn,MPM.* from M_PROCEDURE_MODULING MPM
+		<include refid="WhereClase" />
+		<include refid="pageSQLFoot" />
+	</select>
+
+
+	<select id="findPagerTotal" resultType="long">
+		select count(id) from M_PROCEDURE_MODULING
+		<include refid="WhereClase" />
+	</select>
+</mapper>
