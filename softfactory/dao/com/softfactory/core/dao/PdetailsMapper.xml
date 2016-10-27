@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softfactory.core.dao.PdetailsMapper">
+
+	<resultMap type="com.softfactory.pojo.Pdetails" id="pdetails-result">
+		<id property="id" column="ID" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="procedureName" column="PROCEDURE_NAME" />
+		<result property="procedureId" column="PROCEDURE_ID" />
+		<result property="procedureDescribe" column="PROCEDURE_DESCRIBE" />
+		<result property="labourHourAmount" column="LABOUR_HOUR_AMOUNT" />
+		<result property="costPrice" column="COST_PRICE" />
+		<result property="subtotal" column="SUBTOTAL" />
+		<result property="productId" column="PRODUCT_ID" />
+	</resultMap>
+
+	<select id="findByPId" resultMap="pdetails-result">
+		select ID,PARENT_ID,PROCEDURE_NAME,PROCEDURE_ID,PROCEDURE_DESCRIBE,LABOUR_HOUR_AMOUNT,
+		COST_PRICE,SUBTOTAL from M_DESIGN_PROCEDURE_DETAILS where PARENT_ID = 
+		(select id from M_DESIGN_PROCEDURE where PRODUCT_ID = #{productId})
+	</select>
+</mapper>

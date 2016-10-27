@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softfactory.core.dao.MProcedureMapper">
+
+	<resultMap type="com.softfactory.pojo.MProcedure" id="procedure-result">
+		<id property="id" column="ID" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="detailsNumber" column="DETAILS_NUMBER" />
+		<result property="procedureId" column="PROCEDURE_ID" />
+		<result property="procedureName" column="PROCEDURE_NAME" />
+		<result property="labourHourAmount" column="LABOUR_HOUR_AMOUNT" />
+		<result property="realLabourHourAmount" column="REAL_LABOUR_HOUR_AMOUNT" />
+		<result property="subtotal" column="SUBTOTAL" />
+		<result property="realSubtotal" column="REAL_SUBTOTAL" />
+		<result property="moduleSubtotal" column="MODULE_SUBTOTAL" />
+		<result property="realModuleSubtotal" column="REAL_MODULE_SUBTOTAL" />
+		<result property="costPrice" column="COST_PRICE" />
+		<result property="demandAmount" column="DEMAND_AMOUNT" />
+		<result property="realAmount" column="REAL_AMOUNT" />
+		<result property="procedureFinishTag" column="PROCEDURE_FINISH_TAG" />
+		<result property="procedureTransferTag" column="PROCEDURE_TRANSFER_TAG" />
+	</resultMap>
+
+	<sql id="pageSQLHead">
+		select *
+		from (select row_number() over(
+	</sql>
+	<sql id="orderBy">
+		<if test="sort != null and order != null">
+			order by
+			<choose>
+				<when test="sort == 'id'">ID</when>
+				<when test="sort == 'procedureName'">PROCEDURE_NAME</when>
+				<otherwise>ID</otherwise>
+			</choose>
+			<if test="order == 'asc'">asc</if>
+			<if test="order == 'desc'">desc</if>
+		</if>
+	</sql>
+
+	<sql id="WhereClase">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and ID LIKE #{id}
+			</if>
+			<if test="procedureName != null and procedureName != ''">
+				and PROCEDURE_NAME LIKE #{procedureName}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="pageSQLFoot">
+    <![CDATA[ ) where rn > #{pageno} and rn <= #{pagesize} ]]>
+	</sql>
+
+	<select id="findPager" resultMap="procedure-result">
+		<include refid="pageSQLHead" />
+		<include refid="orderBy" />
+		) rn,m.* from M_PROCEDURE m
+		<include refid="WhereClase" />
+		<include refid="pageSQLFoot" />
+	</select>
+
+	<select id="findPagerTotal" resultType="long">
+		select count(ID) from M_PROCEDURE
+		<include refid="WhereClase" />
+	</select>
+</mapper>

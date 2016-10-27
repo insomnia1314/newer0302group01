@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softfactory.core.dao.MProcedureModuleMapper">
+
+	<resultMap type="com.softfactory.pojo.MProcedureModule" id="procedureModule-result">
+		<id property="id" column="ID" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="detailsNumber" column="DETAILS_NUMBER" />
+		<result property="productId" column="PRODUCT_ID" />
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="costPrice" column="COST_PRICE" />
+		<result property="amount" column="AMOUNT" />
+		<result property="renewAmount" column="RENEW_AMOUNT" />
+		<result property="realAmount" column="REAL_AMOUNT" />
+		<result property="subtotal" column="SUBTOTAL" />
+		<result property="realSubtotal" column="REAL_SUBTOTAL" />
+	</resultMap>
+
+	<sql id="pageSQLHead">
+		select *
+		from (select row_number() over(
+	</sql>
+	<sql id="orderBy">
+		<if test="sort != null and order != null">
+			order by
+			<choose>
+				<when test="sort == 'id'">ID</when>
+				<when test="sort == 'procedureName'">PROCEDURE_NAME</when>
+				<otherwise>ID</otherwise>
+			</choose>
+			<if test="order == 'asc'">asc</if>
+			<if test="order == 'desc'">desc</if>
+		</if>
+	</sql>
+
+	<sql id="WhereClase">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and ID LIKE #{id}
+			</if>
+			<if test="productName != null and productName != ''">
+				and PROCEDURE_NAME LIKE #{productName}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="pageSQLFoot">
+    <![CDATA[ ) where rn > #{pageno} and rn <= #{pagesize} ]]>
+	</sql>
+
+	<select id="findPager" resultMap="procedureModule-result">
+		<include refid="pageSQLHead" />
+		<include refid="orderBy" />
+		) rn,m.* from M_PROCEDURE_MODULE m
+		<include refid="WhereClase" />
+		<include refid="pageSQLFoot" />
+	</select>
+
+	<select id="findPagerTotal" resultType="long">
+		select count(ID) from M_PROCEDURE_MODULE
+		<include refid="WhereClase" />
+	</select>
+</mapper>
