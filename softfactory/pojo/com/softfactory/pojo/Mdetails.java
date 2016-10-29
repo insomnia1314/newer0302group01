@@ -6,7 +6,9 @@ public class Mdetails implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;// 序号
-	private Integer parentId;//产品工序序号
+	private String designId;// 设计编号
+	private String procedureName;
+	private Integer parentId;// 产品工序序号
 	private String productId;// 物料编号
 	private String productName;// 物料名称
 	private double amount;// 本工序数量
@@ -85,6 +87,22 @@ public class Mdetails implements Serializable {
 
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getDesignId() {
+		return designId;
+	}
+
+	public void setDesignId(String designId) {
+		this.designId = designId;
+	}
+
+	public String getProcedureName() {
+		return procedureName;
+	}
+
+	public void setProcedureName(String procedureName) {
+		this.procedureName = procedureName;
 	}
 
 }

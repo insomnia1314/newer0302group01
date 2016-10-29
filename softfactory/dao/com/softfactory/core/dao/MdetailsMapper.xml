@@ -7,6 +7,8 @@
 
 	<resultMap type="com.softfactory.pojo.Mdetails" id="mdetails-result">
 		<id property="id" column="ID" />
+		<result property="designId" column="DESIGN_ID" />
+		<result property="procedureName" column="PROCEDURE_NAME" />
 		<result property="parentId" column="PARENT_ID" />
 		<result property="productId" column="PRODUCT_ID" />
 		<result property="productName" column="PRODUCT_NAME" />
@@ -20,5 +22,11 @@
 	<select id="findByPId" resultMap="mdetails-result">
 		select p.ID,p.PARENT_ID,p.PRODUCT_ID,p.PRODUCT_NAME,p.PRODUCT_DESCRIBE,p.AMOUNT,
 		p.AMOUNT_UNIT,p.COST_PRICE,p.SUBTOTAL from M_DESIGN_PROCEDURE_MODULE p where p.PARENT_ID = #{id}
+	</select>
+	
+	<select id="findById" resultMap="mdetails-result">
+		select p.ID,d.PROCEDURE_NAME,m.DESIGN_ID,p.PARENT_ID,p.PRODUCT_ID,p.PRODUCT_NAME,p.PRODUCT_DESCRIBE,p.AMOUNT,
+		p.AMOUNT_UNIT,p.COST_PRICE,p.SUBTOTAL from M_DESIGN_PROCEDURE_MODULE p,M_DESIGN_PROCEDURE m,M_DESIGN_PROCEDURE_DETAILS d
+		 where p.ID = #{id} and m.id = p.PARENT_ID and p.id = d.parent_id
 	</select>
 </mapper>

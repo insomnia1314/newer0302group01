@@ -18,4 +18,8 @@ public class MdetailsService {
 	public List<Mdetails> findByPId(Integer id) {
 		return mdetailsMapper.findByPId(id);
 	}
+	
+	public Mdetails findById(Integer id){
+		return mdetailsMapper.findById(id);
+	}
 }
