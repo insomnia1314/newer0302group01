@@ -30,13 +30,6 @@
 		from (select row_number()
 		over(
 	</sql>
-	<!-- 分页原先 /* * select PARENT_ID parentId,DETAILS_NUMBER detailsNumber,PROCEDURE_ID 
-		procedureId,PROCEDURE_NAME ProcedureName, LABOUR_HOUR_AMOUNT labourHourAmount,COST_PRICE 
-		costPrice,SUBTOTAL subtotal, PROCEDURE_DESCRIBE procedureDescribe, REG_COUNT 
-		regCount, PROCEDURE_RESPONSIBLE_PERSON procedureResponsiblePerson, REGISTER 
-		register,REGISTER_TIME registerTime,CHECKER checker ,CHECK_TIME checkerTime 
-		* from (select row_number() over(order by ID) rn, MP.* from M_PROCEDURING 
-		MP WHERE 1=1) * WHERE RN>PAGE AND RN<=PAGESIZE */ -->
 	<sql id="orderBy">
 		<if test="sort != null and order != null">
 			order by
@@ -69,6 +62,9 @@
 	<sql id="WhereClase">
 		<where>
 			1=1
+			<if test="mProceduring.parentId != null">
+				and PARENT_ID= #{mProceduring.parentId}
+			</if>
 		</where>
 	</sql>
 

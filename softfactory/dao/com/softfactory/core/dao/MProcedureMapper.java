@@ -46,4 +46,10 @@ public interface MProcedureMapper {
 		    @Param("procedureName") String procedureName);
 	
 	long findPagerTotal(@Param("id") Integer id,@Param("procedureName") String procedureName);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	MProcedure findByPrentId();
 }

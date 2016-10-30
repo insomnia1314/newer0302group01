@@ -34,4 +34,29 @@ public interface ManufactureMapper {
 
 	long findPagerTotal(@Param("id") Integer id,@Param("productName") String productName);
 	
+	/**
+	 * 通过主键加载记录
+	 * @param id
+	 * @return
+	 */
+	Manufacture findById(Integer id);
+	/**
+	 * author 龙光祥
+	 * @return 查找通过审核的生产计划
+	 *
+	 */
+	List<Manufacture> findPassedMFG(
+			@Param("pageno") Integer pageno, 
+			@Param("pagesize") Integer pagesize, 
+			@Param("sort") String sort,
+		    @Param("order") String order,
+		    @Param("manufacture") Manufacture manufacture);
+	
+	/**
+	 * 通过审核的生产计划总记录数
+	 * @author GuangxiangLong
+	 * @param manufacture
+	 * @return
+	 */
+	long findPassedMFGTotal(@Param("manufacture") Manufacture manufacture);
 }

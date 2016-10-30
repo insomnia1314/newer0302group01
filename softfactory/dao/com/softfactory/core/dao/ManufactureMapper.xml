@@ -56,6 +56,15 @@
 			</if>
 		</where>
 	</sql>
+	
+	<sql id="WhereClaseLgx">
+		<where>
+			1=1
+			<if test="manufacture.checkTag != null and manufacture.checkTag != ''">
+				and CHECK_TAG='S001-1'
+			</if>
+		</where>
+	</sql>
 
 	<sql id="pageSQLFoot">
     <![CDATA[ ) where rn > #{pageno} and rn <= #{pagesize} ]]>
@@ -72,5 +81,25 @@
 	<select id="findPagerTotal" resultType="long">
 		select count(ID) from M_MANUFACTURE
 		<include refid="WhereClase" />
+	</select>
+	
+	<!-- 加载通过审核生产计划 -->
+	<select id="findPassedMFG" resultMap="manufacture-result">
+		<include refid="pageSQLHead" />
+		<include refid="orderBy" />
+		) rn,m.* from M_MANUFACTURE m
+		<include refid="WhereClaseLgx" />
+		<include refid="pageSQLFoot" />
+	</select>
+	
+	<!-- 加载通过审核生产计划的总结记录数 -->
+	<select id="findPassedMFGTotal" resultType="long">
+		select count(ID) from M_MANUFACTURE
+		<include refid="WhereClaseLgx" />
+	</select>
+	
+	<!-- LGX -->
+	<select id="findById" resultMap="manufacture-result">
+		SELECT * FROM M_MANUFACTURE WHERE ID=#{id}
 	</select>
 </mapper>

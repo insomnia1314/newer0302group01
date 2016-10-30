@@ -40,7 +40,6 @@ public interface MProceduringMapper {
 		
 	/**
 	 * 增加方法
-	 * 
 	 * @param m
 	 * @return
 	 */
@@ -55,7 +54,6 @@ public interface MProceduringMapper {
 
 	/**
 	 * 修改方法
-	 * 
 	 * @param m
 	 * @return
 	 */
