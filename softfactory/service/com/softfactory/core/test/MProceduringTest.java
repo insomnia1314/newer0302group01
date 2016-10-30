@@ -89,4 +89,12 @@ public class MProceduringTest {
 	public void testDel() {
 		mProceduringService.del(8);
 	}
+	
+//	@Test
+//	public void testPassesMFG(){
+//		List<Manufacture> l = mProceduringService.findPassedMFG();
+//		for(Manufacture m : l){
+//			System.out.println(m);
+//		}
+//	}
 }

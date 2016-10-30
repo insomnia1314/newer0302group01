@@ -68,4 +68,37 @@ public class ManufactureServiceTest {
 		  System.out.println("222222222222");
 	  }
   }
+  
+  /**
+   * 
+   * 测试加载通过审核
+   * @author GuangxiangLong
+   * 
+   */
+  @Test
+  public void findPagerMFG(){
+	  Integer page=1;
+	  Integer rows=5;
+	  String sort="id";
+	  String order="asc";
+	  Integer pageno=(page-1)*rows;
+	  Integer pagesize=page*rows;
+	  Manufacture manufacture = new Manufacture();
+	  Pager<Manufacture>pager=manufactureService.findPassedMFG(pageno, pagesize, sort, order,manufacture);
+	  System.out.println(pager.getTotal());
+	  for(Manufacture procucts:pager.getRows()){
+		  System.out.println(procucts.getAmount()+"-------"+procucts.getId());
+	  }
+  }
+  
+  /**
+   * 
+   */
+  @Test
+  public void testFindById(){
+	  Integer id=1;
+	  Manufacture m = manufactureService.findById(id);
+	  System.out.println(m.getAmount());
+  }
+  
 }
