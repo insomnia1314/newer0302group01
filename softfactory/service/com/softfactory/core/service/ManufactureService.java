@@ -25,4 +25,35 @@ public class ManufactureService {
 	public int add(Manufacture mf){
 		return manufactureMapper.add(mf);
 	}
+	
+	/**
+	 * 
+	 * 加载通过审核的生产计划
+	 * @author GuangxiangLong
+	 * @param pageno
+	 * @param pagesize
+	 * @param sort
+	 * @param order
+	 * @param manufacture 查询参数
+	 * @return 返回分页对象
+	 * 
+	 */
+	
+	public Pager<Manufacture> findPassedMFG(Integer pageno, Integer pagesize, String sort, String order,Manufacture manufacture){
+		Pager<Manufacture> pager = new Pager<Manufacture>();
+		pager.setRows(manufactureMapper.findPassedMFG(pageno, pagesize, sort, order, manufacture));
+		pager.setTotal(manufactureMapper.findPassedMFGTotal(manufacture));
+		return pager;
+	}
+	
+	/**
+	 * 通过ID加载单条数据
+	 * @author GuangxiangLong
+	 * @param id
+	 * @return 
+	 */
+	
+	public Manufacture findById(Integer id){
+		return manufactureMapper.findById(id);
+	}
 }
