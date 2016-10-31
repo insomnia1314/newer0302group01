@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.softfactory.pojo.MProcedure;
 
+/**
+ * 生产工序记录
+ */
 @Repository("mprocedureMapper")
 public interface MProcedureMapper {
 	
@@ -48,8 +51,8 @@ public interface MProcedureMapper {
 	long findPagerTotal(@Param("id") Integer id,@Param("procedureName") String procedureName);
 	
 	/**
-	 * 
+	 * @author GuangxiangLong
 	 * @return
 	 */
-	MProcedure findByPrentId();
+	List<MProcedure> findByPrentId(Integer prentId);
 }
