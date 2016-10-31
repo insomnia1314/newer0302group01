@@ -1,5 +1,7 @@
 package com.softfactory.core.test;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -61,5 +63,21 @@ public class MProcedureServiceTest {
 	  }else{
 		  System.out.println("222222222222");
 	  }
+  }
+  
+
+  @Test
+  public void testprentId(){
+	  Integer prentId = 1;
+	  List<MProcedure> l = procedureService.findByPrentId(prentId);
+	  for(MProcedure procucts:l){
+		  System.out.println(procucts.getCostPrice()+"-------"+procucts.getId());
+	  }
+  }
+  @Test
+  public void testFindById(){
+	  Integer id = 1;
+	  MProcedure m = procedureService.findById(id);
+	  System.out.println(m.getProcedureName());
   }
 }
