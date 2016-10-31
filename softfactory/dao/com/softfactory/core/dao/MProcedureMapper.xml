@@ -73,4 +73,8 @@
 	<select id="findByPrentId" resultMap="procedure-result"> 
 		SELECT * FROM M_PROCEDURE WHERE PARENT_ID = #{prentId"}
 	</select>
+	
+	<select id="findById" resultMap="procedure-result">
+		SELECT * FROM M_PROCEDURE WHERE ID = #{id}
+	</select>
 </mapper>
