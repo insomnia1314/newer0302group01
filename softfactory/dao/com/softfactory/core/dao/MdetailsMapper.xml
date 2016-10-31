@@ -8,6 +8,7 @@
 	<resultMap type="com.softfactory.pojo.Mdetails" id="mdetails-result">
 		<id property="id" column="ID" />
 		<result property="designId" column="DESIGN_ID" />
+		<result property="detailsNumber" column="DETAILS_NUMBER" />
 		<result property="procedureName" column="PROCEDURE_NAME" />
 		<result property="parentId" column="PARENT_ID" />
 		<result property="productId" column="PRODUCT_ID" />
