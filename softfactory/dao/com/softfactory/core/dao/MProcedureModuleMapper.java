@@ -12,10 +12,7 @@ import com.softfactory.pojo.MProcedureModule;
 @Repository("mprocedureModuleMapper")
 public interface MProcedureModuleMapper {
 	
-	@Insert("insert into M_PROCEDURE_MODULE(ID,PARENT_ID,DETAILS_NUMBER,PRODUCT_ID,PRODUCT_NAME,"
-			+ "COST_PRICE,AMOUNT,RENEW_AMOUNT,REAL_AMOUNT,SUBTOTAL,REAL_SUBTOTAL) values(#{id},"
-			+ "#{parentId},#{detailsNumber},#{productId},#{productName},#{costPrice},#{amount},"
-			+ "#{renewAmount},#{realAmount},#{subtotal},#{realSubtotal})")
+	@Insert("insert into M_PROCEDURE_MODULE(ID,PARENT_ID,DETAILS_NUMBER,PRODUCT_ID,PRODUCT_NAME,COST_PRICE,AMOUNT,SUBTOTAL) values(#{id},#{parentId},#{detailsNumber},#{productId},#{productName},#{costPrice},#{amount},#{subtotal})")
 	@SelectKey(statement = "select SEQ_M_PROCEDURE_MODULE.nextval from dual", keyProperty = "id", resultType = int.class, before = true)
 	int add(MProcedureModule pm);
 	

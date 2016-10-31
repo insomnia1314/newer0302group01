@@ -17,6 +17,7 @@
 		<result property="checkTime" column="CHECK_TIME" />
 		<result property="checkTag" column="CHECK_TAG" />
 		<result property="manufactureTag" column="MANUFACTURE_TAG" />
+		<result property="remark" column="REMARK" />
 	</resultMap>
 
 	<sql id="pageSQLHead">
@@ -37,7 +38,7 @@
 
 	<sql id="WhereClase">
 		<where>
-			1=1
+			CHECK_TAG = 'S001-1' and MANUFACTURE_TAG = 'P001-0'
 			<if test="id != null and id != ''">
 				and ID LIKE #{id}
 			</if>

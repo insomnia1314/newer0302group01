@@ -16,10 +16,14 @@ public interface ManufactureMapper {
 	@Update("update M_MANUFACTURE set CHECK_TAG=#{checkTag} where ID = #{id}")
 	int modify(Manufacture mf);
 	
-	@Insert("insert into M_MANUFACTURE values(#{id},#{manufactureId},#{productId},#{productName},"
-			+ "#{amount},#{testedAmount},#{applyIdGroup},#{productDescribe},#{moduleCostPriceSum},"
-			+ "#{realModuleCostPriceSum},#{labourCostPriceSum},#{realLabourCostPriceSum},#{designer},"
-			+ "#{register},#{registerTime},#{checker},#{checkTime},#{remark},#{checkTag},"
+	@Insert("insert into M_MANUFACTURE(ID,MANUFACTURE_ID,PRODUCT_ID,PRODUCT_NAME,AMOUNT,"
+			+ "APPLY_ID_GROUP,PRODUCT_DESCRIBE,MODULE_COST_PRICE_SUM,"
+			+ "LABOUR_COST_PRICE_SUM,DESIGNER,REGISTER,REGISTER_TIME,"
+			+ "REMARK,CHECK_TAG,MANUFACTURE_PROCEDURE_TAG) "
+			+ "values(#{id},#{manufactureId},#{productId},#{productName},"
+			+ "#{amount},#{applyIdGroup},#{productDescribe},#{moduleCostPriceSum},"
+			+ "#{labourCostPriceSum},#{designer},"
+			+ "#{register},#{registerTime},#{remark},#{checkTag},"
 			+ "#{manufactureProcedureTag})")
 	 @SelectKey(statement = "select SEQ_M_MANUFACTURE.nextval from dual", keyProperty = "id", resultType = int.class, before = true)
 	int add(Manufacture mf);

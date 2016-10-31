@@ -22,7 +22,7 @@ public interface ApplyMapper {
 	 * @param mf
 	 * @return
 	 */
-	@Update("update M_APPLY set REGISTER = #{register}, MANUFACTURE_TAG = 'P001-1' where ID = #{id}")
+	@Update("update M_APPLY set REGISTER = #{register}, MANUFACTURE_TAG = 'P001-1',REMARK = #{remark} where ID = #{id}")
 	int modify(Apply mf);
 	
 	

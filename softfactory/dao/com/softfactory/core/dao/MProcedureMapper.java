@@ -21,11 +21,10 @@ public interface MProcedureMapper {
 	 * @return
 	 */
 	@Insert("insert into M_PROCEDURE(ID,PARENT_ID,DETAILS_NUMBER,PROCEDURE_ID,PROCEDURE_NAME,"
-			+ "LABOUR_HOUR_AMOUNT,REAL_LABOUR_HOUR_AMOUNT,SUBTOTAL,REAL_SUBTOTAL,MODULE_SUBTOTAL,"
-			+ "REAL_MODULE_SUBTOTAL,COST_PRICE,DEMAND_AMOUNT,REAL_AMOUNT,PROCEDURE_FINISH_TAG,"
+			+ "LABOUR_HOUR_AMOUNT,SUBTOTAL,MODULE_SUBTOTAL,COST_PRICE,DEMAND_AMOUNT,PROCEDURE_FINISH_TAG,"
 			+ "PROCEDURE_TRANSFER_TAG) values(#{id},#{parentId},#{detailsNumber},#{procedureId},"
-			+ "#{procedureName},#{labourHourAmount},#{realLabourHourAmount},#{subtotal},#{realSubtotal},"
-			+ "#{moduleSubtotal},#{realModuleSubtotal},#{costPrice},#{demandAmount},#{realAmount},"
+			+ "#{procedureName},#{labourHourAmount},#{subtotal},"
+			+ "#{moduleSubtotal},#{costPrice},#{demandAmount},"
 			+ "#{procedureFinishTag},#{procedureTransferTag})")
 	@SelectKey(statement = "select SEQ_M_PROCEDURE.nextval from dual", keyProperty = "id", resultType = int.class, before = true)
 	int add(MProcedure pd);
