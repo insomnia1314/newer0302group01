@@ -36,4 +36,8 @@ public class MProcedureService {
 	public List<MProcedure> findByPrentId(Integer prentId){
 		return procedureMapper.findByPrentId(prentId);
 	}
+	
+	public MProcedure findById(Integer id){
+		return procedureMapper.findById(id);
+	}
 }
