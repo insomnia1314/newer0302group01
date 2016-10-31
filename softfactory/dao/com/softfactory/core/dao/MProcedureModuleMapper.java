@@ -28,4 +28,6 @@ public interface MProcedureModuleMapper {
 		    @Param("productName") String productName);
 	
 	long findPagerTotal(@Param("id") Integer id,@Param("productName") String productName);
+	
+	List<MProcedureModule> findByPrentId(Integer prentId);
 }
