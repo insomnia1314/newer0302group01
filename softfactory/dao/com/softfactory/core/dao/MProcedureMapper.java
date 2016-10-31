@@ -57,6 +57,7 @@ public interface MProcedureMapper {
 	List<MProcedure> findByPrentId(Integer prentId);
 	
 	/**
+	 * @author GuangxiangLong
 	 * 通过主键加载数据
 	 * @param id
 	 * @return

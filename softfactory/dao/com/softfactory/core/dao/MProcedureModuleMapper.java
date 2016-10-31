@@ -29,5 +29,10 @@ public interface MProcedureModuleMapper {
 	
 	long findPagerTotal(@Param("id") Integer id,@Param("productName") String productName);
 	
+	/**
+	 * @author GuangxiangLong
+	 * @param prentId
+	 * @return
+	 */
 	List<MProcedureModule> findByPrentId(Integer prentId);
 }

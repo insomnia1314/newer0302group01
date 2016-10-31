@@ -59,13 +59,14 @@
 		<include refid="WhereClase" />
 		<include refid="pageSQLFoot" />
 	</select>
-
+	
+	<!-- lgx -->
 	<select id="findPagerTotal" resultType="long">
 		select count(ID) from M_PROCEDURE_MODULE
 		<include refid="WhereClase" />
 	</select>
-	
+	<!-- lgx -->
 	<select id="findByPrentId" resultMap="procedureModule-result">
-		SELECT * FROM M_PROCEDURE_MODULE FROM WHERE PARENT_ID = #{prentId"}
+		SELECT * FROM M_PROCEDURE_MODULE WHERE PARENT_ID = #{"prentId"}
 	</select>
 </mapper>

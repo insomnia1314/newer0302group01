@@ -70,10 +70,11 @@
 		<include refid="WhereClase" />
 	</select>
 	
+	<!-- lgx -->
 	<select id="findByPrentId" resultMap="procedure-result"> 
 		SELECT * FROM M_PROCEDURE WHERE PARENT_ID = #{prentId"}
 	</select>
-	
+	<!-- lgx -->
 	<select id="findById" resultMap="procedure-result">
 		SELECT * FROM M_PROCEDURE WHERE ID = #{id}
 	</select>
