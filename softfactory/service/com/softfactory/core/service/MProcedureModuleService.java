@@ -1,5 +1,7 @@
 package com.softfactory.core.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -24,5 +26,9 @@ public class MProcedureModuleService {
 
 	public int add(MProcedureModule pd) {
 		return procedureModuleMapper.add(pd);
+	}
+	
+	public List<MProcedureModule> findByPrentId(Integer prentId){
+		return procedureModuleMapper.findByPrentId(prentId);
 	}
 }
