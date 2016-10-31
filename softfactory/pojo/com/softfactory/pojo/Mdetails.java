@@ -8,6 +8,7 @@ public class Mdetails implements Serializable {
 	private Integer id;// 序号
 	private String designId;// 设计编号
 	private String procedureName;
+	private Integer detailsNumber;// 本工序物料序号
 	private Integer parentId;// 产品工序序号
 	private String productId;// 物料编号
 	private String productName;// 物料名称
@@ -103,6 +104,14 @@ public class Mdetails implements Serializable {
 
 	public void setProcedureName(String procedureName) {
 		this.procedureName = procedureName;
+	}
+
+	public Integer getDetailsNumber() {
+		return detailsNumber;
+	}
+
+	public void setDetailsNumber(Integer detailsNumber) {
+		this.detailsNumber = detailsNumber;
 	}
 
 }

@@ -29,6 +29,7 @@ public class Apply implements Serializable {
 	private Date checkTime; // 审核时间
 	private String checkTag; // 审核状态
 	private String manufactureTag;// 派工标志
+	private String remark; // 备注
 
 	public Apply() {
 		super();
@@ -120,6 +121,14 @@ public class Apply implements Serializable {
 
 	public void setRegister(String register) {
 		this.register = register;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }
