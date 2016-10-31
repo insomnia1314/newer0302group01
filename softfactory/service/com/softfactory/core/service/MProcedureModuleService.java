@@ -28,6 +28,11 @@ public class MProcedureModuleService {
 		return procedureModuleMapper.add(pd);
 	}
 	
+	/**
+	 * @author GuangxiangLong
+	 * @param prentId
+	 * @return
+	 */
 	public List<MProcedureModule> findByPrentId(Integer prentId){
 		return procedureModuleMapper.findByPrentId(prentId);
 	}

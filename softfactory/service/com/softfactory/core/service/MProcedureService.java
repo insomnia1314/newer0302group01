@@ -37,6 +37,11 @@ public class MProcedureService {
 		return procedureMapper.findByPrentId(prentId);
 	}
 	
+	/**
+	 * @author GuangxiangLong
+	 * @param id
+	 * @return
+	 */
 	public MProcedure findById(Integer id){
 		return procedureMapper.findById(id);
 	}

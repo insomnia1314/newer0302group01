@@ -52,7 +52,6 @@ public class ManufactureService {
 	 * @param id
 	 * @return 
 	 */
-	
 	public Manufacture findById(Integer id){
 		return manufactureMapper.findById(id);
 	}
