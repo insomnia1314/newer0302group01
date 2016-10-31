@@ -6,6 +6,7 @@
 <mapper namespace="com.softfactory.core.dao.MdetailsMapper">
 
 	<resultMap type="com.softfactory.pojo.Mdetails" id="mdetails-result">
+	
 		<id property="id" column="ID" />
 		<result property="designId" column="DESIGN_ID" />
 		<result property="detailsNumber" column="DETAILS_NUMBER" />
