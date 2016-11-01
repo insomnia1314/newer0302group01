@@ -62,4 +62,9 @@ public interface MProcedureMapper {
 	 * @return
 	 */
 	MProcedure findById(Integer id);
+	
+	/**
+	 * 
+	 */
+	List<MProcedure> findByFinishTag(String finishTag);
 }
