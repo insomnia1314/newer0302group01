@@ -36,8 +36,8 @@ public interface ManufactureMapper {
 	@SelectKey(statement = "select SEQ_S_PAY.nextval from dual", keyProperty = "sid", resultType = int.class, before = true)
 	int addStorePay(StoreMaxPay sp);
 	
-	@Insert("insert into S_PAY_DETAILS(ID,PARENT_ID,PRODUCT_ID,PRODUCT_NAME,PRODUCT_DESCRIBE,AMOUNT,AMOUNT_UNIT,"
-			+ "COST_PRICE,SUBTOTAL,PAY_TAG) values(#{did},#{parentId},#{productId},#{productName},#{productDescribe},"
+	@Insert("insert into S_PAY_DETAILS(ID,PARENT_ID,PRODUCT_ID,PRODUCT_NAME,AMOUNT,AMOUNT_UNIT,"
+			+ "COST_PRICE,SUBTOTAL,PAY_TAG) values(#{did},#{parentId},#{productId},#{productName},"
 			+ "#{amount},#{amountUnit},#{costPrice},#{subtotal},#{dispatch})")
 	@SelectKey(statement = "select SEQ_S_PAY_DETAILS.nextval from dual", keyProperty = "did", resultType = int.class, before = true)
 	int addStorePayDetails(StorePayDetails spd);
