@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.softfactory.core.dao.ManufactureMapper;
 import com.softfactory.core.util.Pager;
 import com.softfactory.pojo.Manufacture;
+import com.softfactory.pojo.StoreMaxPay;
+import com.softfactory.pojo.StorePayDetails;
 
 @Service("manufactureService")
 public class ManufactureService {
@@ -25,7 +27,34 @@ public class ManufactureService {
 	public int add(Manufacture mf){
 		return manufactureMapper.add(mf);
 	}
+	/**
+	 * 修改生产总表
+	 * @param mf
+	 * @return
+	 */
+	public int modify(Manufacture mf){
+		return manufactureMapper.modify(mf);
+	}
+	/**
+	 * 添加出库
+	 * @param sp
+	 * @return
+	 */
+	public int addStorePay(StoreMaxPay sp){
+		return manufactureMapper.addStorePay(sp);
+	}
+	/**
+	 * 添加出库明细
+	 * @param spd
+	 * @return
+	 */
+	public int addStorePayDetails(StorePayDetails spd){
+		return manufactureMapper.addStorePayDetails(spd);
+	}
 	
+	public String findByMax(){
+		return manufactureMapper.findByMax();
+	}
 	/**
 	 * 
 	 * 加载通过审核的生产计划

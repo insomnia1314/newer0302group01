@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.softfactory.pojo.Manufacture;
+import com.softfactory.pojo.StoreMaxPay;
+import com.softfactory.pojo.StorePayDetails;
 
 @Repository("manufactureMapper")
 public interface ManufactureMapper {
@@ -28,6 +30,18 @@ public interface ManufactureMapper {
 	 @SelectKey(statement = "select SEQ_M_MANUFACTURE.nextval from dual", keyProperty = "id", resultType = int.class, before = true)
 	int add(Manufacture mf);
 	
+	@Insert("insert into S_PAY(ID,PAY_ID,REASON,REASONEXACT,AMOUNT_SUM,COST_PRICE_SUM,REMARK,REGISTER,"
+			+ "REGISTER_TIME,CHECK_TAG,STORE_TAG) values(#{sid},#{payId},#{reason},#{reasonExact},"
+			+ "#{amountSum},#{costPriceSum},#{remark},#{register},#{registerTime},#{checkTag},#{storeTag})")
+	@SelectKey(statement = "select SEQ_S_PAY.nextval from dual", keyProperty = "sid", resultType = int.class, before = true)
+	int addStorePay(StoreMaxPay sp);
+	
+	@Insert("insert into S_PAY_DETAILS(ID,PARENT_ID,PRODUCT_ID,PRODUCT_NAME,PRODUCT_DESCRIBE,AMOUNT,AMOUNT_UNIT,"
+			+ "COST_PRICE,SUBTOTAL,PAY_TAG) values(#{did},#{parentId},#{productId},#{productName},#{productDescribe},"
+			+ "#{amount},#{amountUnit},#{costPrice},#{subtotal},#{dispatch})")
+	@SelectKey(statement = "select SEQ_S_PAY_DETAILS.nextval from dual", keyProperty = "did", resultType = int.class, before = true)
+	int addStorePayDetails(StorePayDetails spd);
+	
 	List<Manufacture> findPager(
 			@Param("pageno") Integer pageno, 
 			@Param("pagesize") Integer pagesize, 
@@ -37,6 +51,9 @@ public interface ManufactureMapper {
 		    @Param("productName") String productName);
 
 	long findPagerTotal(@Param("id") Integer id,@Param("productName") String productName);
+	
+	
+	String findByMax();
 	
 	/**
 	 * 通过主键加载记录

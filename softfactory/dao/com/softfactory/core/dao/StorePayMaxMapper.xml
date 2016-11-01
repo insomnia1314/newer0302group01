@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softfactory.core.dao.StorePayMaxMapper">
+	<resultMap type="com.softfactory.pojo.StoreMaxPay" >
+		<id property="id" column="ID" />
+		<result property="payId" column="PAY_ID" />
+		<result property="storer" column="STORER" />
+		<result property="reason" column="REASON" />
+		<result property="reasonExact" column="REASONEXACT" />
+		<result property="amountSum"  column="AMOUNT_SUM" />
+		<result property="costPriceSum"  column="COST_PRICE_SUM" />
+		<result property="paidAmountSum" column="PAID_AMOUNT_SUM" />
+		<result property="remark" column="REMARK" />
+		<result property="register" column="REGISTER" />
+		<result property="registerTime" column="REGISTER_TIME" />
+		<result property="checker" column="CHECKER" />
+		<result property="checkTime" column="CHECK_TIME" />
+		<result property="checkTag" column="CHECK_TAG" />
+		<result property="attemper" column="ATTEMPER" />
+		<result property="attemperTime" column=" ATTEMPER_TIME" />
+		<result property="storeTag" column="STORE_TAG" />
+	</resultMap>
+
+	<select id="findByMax" resultType="String">
+		select MAX(PAY_ID) from S_PAY
+	</select>
+</mapper>
+	

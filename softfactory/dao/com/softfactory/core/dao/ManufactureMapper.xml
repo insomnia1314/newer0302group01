@@ -102,4 +102,9 @@
 	<select id="findById" resultMap="manufacture-result">
 		SELECT * FROM M_MANUFACTURE WHERE ID=#{id}
 	</select>
+	
+	<select id="findByMax" resultType="String">
+		select max(MANUFACTURE_ID) from M_MANUFACTURE
+	</select>
+	
 </mapper>
