@@ -45,10 +45,10 @@ public interface MProceduringMapper {
 	 */
 	@Insert("INSERT INTO M_PROCEDURING(ID,PARENT_ID,DETAILS_NUMBER,PROCEDURE_ID,PROCEDURE_NAME,"
 			+ "LABOUR_HOUR_AMOUNT,COST_PRICE,SUBTOTAL,PROCEDURE_DESCRIBE,REG_COUNT,PROCEDURE_RESPONSIBLE_PERSON,"
-			+ "REGISTER,REGISTER_TIME,CHECKER,CHECK_TIME) "
+			+ "REGISTER,REGISTER_TIME) "
 			+ "VALUES(#{mPMId},#{parentId},#{detailsNumber},#{procedureId},#{procedureName},"
 			+ "#{labourHourAmount},#{costPrice},#{subtotal},#{procedureDescribe},#{regCount},"
-			+ "#{procedureResponsiblePerson},#{register},#{registerTime},#{checker},#{checkTime})")
+			+ "#{procedureResponsiblePerson},#{register},#{registerTime})")
 	@SelectKey(before = true, keyProperty = "mPMId", resultType = int.class, statement = "SELECT SEQ_M_PROCEDURING.NEXTVAL FROM DUAL")
 	int add(MProceduring m);
 
