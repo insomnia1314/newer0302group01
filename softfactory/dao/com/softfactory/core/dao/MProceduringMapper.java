@@ -48,7 +48,7 @@ public interface MProceduringMapper {
 			+ "REGISTER,REGISTER_TIME) "
 			+ "VALUES(#{mPMId},#{parentId},#{detailsNumber},#{procedureId},#{procedureName},"
 			+ "#{labourHourAmount},#{costPrice},#{subtotal},#{procedureDescribe},#{regCount},"
-			+ "#{procedureResponsiblePerson},#{register},#{registerTime})")
+			+ "#{procedureResponsiblePerson},#{register},#{registerTime})") 
 	@SelectKey(before = true, keyProperty = "mPMId", resultType = int.class, statement = "SELECT SEQ_M_PROCEDURING.NEXTVAL FROM DUAL")
 	int add(MProceduring m);
 
