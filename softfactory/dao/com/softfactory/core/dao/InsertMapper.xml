@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softfactory.core.dao.InsertMapper">
+	<resultMap type="com.softfactory.pojo.Insert" id="insert">
+		<id property="Id" column="id" />
+		<result property="productName" column="product_Name" />
+		<result property="productId" column="product_Id" />
+		<result property="productName1" column="productName1" />
+		<result property="amount" column="amount" />
+		<result property="amountUnit" column="amount_unit" />
+		<result property="costPrice" column="cost_Price" />
+		<result property="type" column="type" />
+		<result property="detailsNumber" column="details_Number" />
+		<result property="parentId" column="parent_Id" />
+		<result property="subtotal" column="subtotal" />
+	</resultMap>
+
+	<select id="findByInsert" resultMap="insert">
+		Select
+		d.PRODUCT_NAME,det.PRODUCT_ID,det.PRODUCT_NAME
+		productName1,det.parent_id
+		Id,det.AMOUNT,det.AMOUNT_UNIT,det.
+		COST_PRICE,det.TYPE from D_MODULE
+		d,D_MODULE_DETAILS det where
+		d.ID=PARENT_ID and
+		d.product_id=#{productId} and det.type=#{type}
+	</select>
+</mapper>
