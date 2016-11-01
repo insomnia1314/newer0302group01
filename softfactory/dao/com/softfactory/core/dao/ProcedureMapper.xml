@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softfactory.core.dao.ProcedureMapper">
+	<resultMap type="com.softfactory.pojo.Procedure" id="proresult">
+		<id property="Id" column="id" />
+		<result property="designId" column="design_id" />
+		<result property="productId" column="product_Id" />
+		<result property="productName" column="product_Name" />
+		<result property="designer" column="designer" />
+		<result property="registerTime" column="register_time" />
+		<result property="costPriceSum" column="cost_Price_Sum" />
+		<result property="moduleCostPriceSum" column="module_Cost_Price_Sum" />
+		<result property="procedureDescribe" column="procedure_Describe" />
+		<result property="checkTime" column="check_Time" />
+		<result property="procedureName" column="procedure_Name" />
+		<result property="detailsNumber" column="details_Number" />
+		<result property="prcedureId" column="procedure_Id" />
+		<result property="gongxumiaoshu" column="gongxumiaoshu" />
+		<result property="labourHourAmount" column="labour_Hour_Amount" />
+		<result property="subtotal" column="subtotal" />
+		<result property="moduleSubtotal" column="module_Subtotal" />
+		<result property="zhujian" column="zhujian" />
+		<result property="amount" column="amount" />
+		<result property="amountUnit" column="amount_Unit" />
+		<result property="costPrice" column="cost_Price" />
+		<result property="fk" column="fk" />
+		<result property="productName1" column="productName1" />
+		<result property="checker" column="checker"/>
+	</resultMap>
+
+	<sql id="pageSQLHead">
+		select
+		ID,DESIGN_ID,PRODUCT_ID,PRODUCT_NAME,DESIGNER,REGISTER_TIME,COST_PRICE_SUM
+		from
+		(select row_number() over(
+	</sql>
+
+	<sql id="orderBy">
+		<if test="sort != null and order != null">
+			order by
+			<choose>
+				<when test="sort == 'id'">ID</when>
+			</choose>
+
+			<if test="order == 'asc'">asc</if>
+			<if test="order == 'desc'">desc</if>
+		</if>
+	</sql>
+
+	<sql id="WhereClase">
+	</sql>
+
+	<sql id="pageSQLFoot">
+    <![CDATA[ ) where rn > #{pageno} and rn <= #{pagesize} ]]>
+	</sql>
+
+	<select id="findPager" resultMap="proresult">
+		<include refid="pageSQLHead" />
+		<include refid="orderBy" />
+		) rn, e.* from M_DESIGN_PROCEDURE e where
+		e.DESIGN_MODULE_TAG='G002-0'and e.CHECK_TAG='S001-1'
+		<include refid="WhereClase" />
+		<include refid="pageSQLFoot" />
+	</select>
+
+
+	<select id="findPagerTotal" resultType="long">
+		select count(id) from M_DESIGN_PROCEDURE
+		<include refid="WhereClase" />
+	</select>
+	<select id="count" resultType="int">
+		Select count(DESIGN_ID) from
+		M_DESIGN_PROCEDURE where
+		DESIGN_MODULE_TAG='G002-0' and
+		CHECK_TAG='S001-1'
+	</select>
+	<select id="MapProcedure" resultMap="proresult">
+		Select
+		pro.design_id,pro.PROCEDURE_DESCRIBE,det.PROCEDURE_NAME,det.DETAILS_NUMBER,det.PROCEDURE_ID,det.PROCEDURE_DESCRIBE
+		productName1,det.LABOUR_HOUR_AMOUNT,det.SUBTOTAL,det.MODULE_SUBTOTAL,det.parent_id
+		fk from M_DESIGN_PROCEDURE pro,M_DESIGN_PROCEDURE_DETAILS det
+		where
+		pro.id=det.parent_id and pro.DESIGN_ID=#{designId} And
+		det.DESIGN_MODULE_TAG='D002-0'
+	</select>
+	<select id="findByProductId" resultMap="proresult">
+		Select
+		d.PRODUCT_NAME,det.PRODUCT_ID,det.PRODUCT_NAME
+		productName1,det.AMOUNT,det.AMOUNT_UNIT,det.
+		COST_PRICE,det.TYPE,det.details_number from D_MODULE
+		d,D_MODULE_DETAILS det
+		where d.ID=PARENT_ID and
+		d.product_id=#{productId} and det.type=#{type}
+	</select>
+	<sql id="pageSQLHead1">
+		Select
+		ID,DESIGN_ID,PRODUCT_ID,PRODUCT_NAME,DESIGNER,REGISTER_TIME,COST_PRICE_SUM
+		from
+		(select row_number() over(
+	</sql>
+
+	<sql id="orderBy1">
+		<if test="sort != null and order != null">
+			order by
+			<choose>
+				<when test="sort == 'id'">ID</when>
+			</choose>
+
+			<if test="order == 'asc'">asc</if>
+			<if test="order == 'desc'">desc</if>
+		</if>
+	</sql>
+
+	<sql id="WhereClase1">
+	</sql>
+
+	<sql id="pageSQLFoot1">
+    <![CDATA[ ) where rn > #{pageno} and rn <= #{pagesize} ]]>
+	</sql>
+
+	<select id="reviewPage" resultMap="proresult">
+		<include refid="pageSQLHead1" />
+		<include refid="orderBy1" />
+		) rn, e.* from M_DESIGN_PROCEDURE e where
+		e.DESIGN_MODULE_TAG='G002-1'and e.CHECK_TAG='S001-1'
+		<include refid="WhereClase1" />
+		<include refid="pageSQLFoot1" />
+	</select>
+
+
+	<select id="findPagerTotal1" resultType="long">
+		select
+		count(e.design_module_tag) from M_DESIGN_PROCEDURE e where
+		DESIGN_MODULE_TAG='G002-1'and CHECK_TAG='S001-1'
+	</select>
+	<select id="clickreview">
+		Select
+		pro.DESIGNER,pro.PRODUCT_NAME,pro.PRODUCT_ID,pro.COST_PRICE_SUM,pro.MODULE_COST_PRICE_SUM,pro.PROCEDURE_DESCRIBE,pro.CHECK_TIME,det.PROCEDURE_NAME,det.DETAILS_NUMBER,det.PROCEDURE_ID,det.PROCEDURE_DESCRIBE,det.LABOUR_HOUR_AMOUNT,det.SUBTOTAL,det.MODULE_SUBTOTAL
+		from M_DESIGN_PROCEDURE pro,M_DESIGN_PROCEDURE_DETAILS det where
+		pro.id=det.parent_id and pro.DESIGN_ID=#{designId} And
+		det.DESIGN_MODULE_TAG='D002-1'
+	</select>
+	<select id="findByProductId1" resultMap="proresult">
+		Select
+		d.PRODUCT_NAME,det.PRODUCT_ID,det.PRODUCT_NAME
+		productName1,det.AMOUNT,det.AMOUNT_UNIT,det.
+		COST_PRICE,det.TYPE,det.details_number,det.subtotal from D_MODULE
+		d,D_MODULE_DETAILS det where d.ID=PARENT_ID and
+		d.product_id=#{productId}
+		and det.type=#{type}
+	</select>
+	<!-- 分页第三个 -->
+	<sql id="pageSQLHead2">
+		Select
+		ID,DESIGN_ID,PRODUCT_ID,PRODUCT_NAME,design_module_tag
+		procedureDescribe,cost_price_sum,module_cost_price_sum
+		from
+		(select
+		row_number() over(
+	</sql>
+
+	<sql id="orderBy2">
+		<if test="sort != null and order != null">
+			order by
+			<choose>
+				<when test="sort == 'id'">ID</when>
+			</choose>
+
+			<if test="order == 'asc'">asc</if>
+			<if test="order == 'desc'">desc</if>
+		</if>
+	</sql>
+
+	<sql id="WhereClase2">
+	</sql>
+
+	<sql id="pageSQLFoot2">
+    <![CDATA[ ) where design_module_tag='G002-2' and rn > #{pageno} and rn <= #{pagesize} ]]>
+	</sql>
+
+	<select id="findPager2" resultMap="proresult">
+		<include refid="pageSQLHead2" />
+		<include refid="orderBy2" />
+		) rn, d.* from M_DESIGN_PROCEDURE d
+		<include refid="WhereClase2" />
+		<include refid="pageSQLFoot2" />
+	</select>
+
+
+	<select id="findPagerTotal2" resultType="long">
+		select count(d.design_module_tag) from
+		M_DESIGN_PROCEDURE d
+		<include refid="WhereClase" />
+	</select>
+
+	<select id="groupByCount" resultMap="proresult">
+		select
+		count(d.design_module_tag) fk,d.design_module_tag procedureName from
+		M_DESIGN_PROCEDURE d group by design_module_tag
+	</select>
+	<select id="findByOne" resultMap="proresult">
+		select
+		e.ID,e.DESIGN_ID,e.PRODUCT_ID,e.PRODUCT_NAME,e.checker,e.check_time,e.designer,e.COST_PRICE_SUM,e.module_cost_price_sum
+		from M_DESIGN_PROCEDURE e where e.DESIGN_MODULE_TAG='G002-0'and
+		e.CHECK_TAG='S001-1' and e.product_id=#{productId}
+	</select>
+	<select id="findByOne1" resultMap="proresult">
+		select
+		e.ID,e.DESIGN_ID,e.PRODUCT_ID,e.PRODUCT_NAME,e.checker,e.check_time,e.designer,e.COST_PRICE_SUM,e.module_cost_price_sum
+		from M_DESIGN_PROCEDURE e where e.DESIGN_MODULE_TAG='G002-1'and
+		e.CHECK_TAG='S001-1' and e.product_id=#{productId}
+	</select>
+
+	<select id="findByOne2" resultMap="proresult">
+		select
+		e.ID,e.DESIGN_ID,e.PRODUCT_ID,e.PRODUCT_NAME,e.checker,e.check_time,e.designer,e.COST_PRICE_SUM,e.module_cost_price_sum
+		from M_DESIGN_PROCEDURE e where e.DESIGN_MODULE_TAG='G002-2'and
+		e.CHECK_TAG='S001-1' and e.product_id=#{productId}
+	</select>
+	<select id="MapProcedure1" resultMap="proresult">
+		Select
+		pro.design_id,pro.PROCEDURE_DESCRIBE,det.PROCEDURE_NAME,det.DETAILS_NUMBER,det.PROCEDURE_ID,det.PROCEDURE_DESCRIBE
+		productName1,det.LABOUR_HOUR_AMOUNT,det.SUBTOTAL,det.MODULE_SUBTOTAL,det.parent_id
+		fk from M_DESIGN_PROCEDURE pro,M_DESIGN_PROCEDURE_DETAILS det
+		where
+		pro.id=det.parent_id and pro.DESIGN_ID=#{designId} And
+		det.DESIGN_MODULE_TAG='D002-1'
+	</select>
+	<select id="findBySum" resultType="Double">
+		select t.module_cost_price_sum
+		from
+		M_DESIGN_PROCEDURE t where t.design_id=#{designId}
+	</select>
+</mapper>
