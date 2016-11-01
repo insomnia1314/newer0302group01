@@ -3,7 +3,7 @@
  --%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="../commons/taglib.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -414,14 +414,13 @@ BR {
 <body bgcolor="#ebf3fb">
 	<table class="TABLE_STYLE3">
 		<tr height=20 class="TR_STYLE1">
-			<td class="TD_HANDBOOK_STYLE1">您正在做的业务是：生产管理--内部生产管理--生产登记
-			</td>
+			<td class="TD_HANDBOOK_STYLE1">您正在做的业务是：生产管理--内部生产管理--生产登记</td>
 		</tr>
 	</table>
 	<table align=center class="TABLE_STYLE6">
 		<tr height=20 class="TR_STYLE1">
 			<td bordercolorlight=#848284 bordercolordark=#eeeeee align=right
-				class="TD_STYLE8"><input type="button" value="返回"/></td>
+				class="TD_STYLE8"><input type="button" value="返回" /></td>
 		</tr>
 	</table>
 
@@ -459,7 +458,9 @@ BR {
 															<td bordercolorlight=#848284 bordercolordark=#eeeeee
 																align=right class="TD_STYLE8" width="13%">派工单编号：</td>
 															<td bordercolor=#DEDBD6 align=left class="TD_STYLE2"
-																width="37%">${manufacture.manufactureId}</td>
+																width="37%"><input type="hidden" id="mfgid"
+																value="${manufacture.id}" />
+																${manufacture.manufactureId}</td>
 															<td bordercolorlight=#848284 bordercolordark=#eeeeee
 																align=right class="TD_STYLE8" width="13%">出库单编号：</td>
 															<td bordercolor=#DEDBD6 align=left class="TD_STYLE2"
@@ -485,15 +486,17 @@ BR {
 															<td bordercolor=#DEDBD6 align=left class="TD_STYLE2"
 																width="37%">${manufacture.amount}</td>
 														</tr>
-													</table>
-													<%-- 这里是esayui加载对应数据 --%>
+													</table> <%-- 这里是esayui加载对应数据 --%>
 													<table align=center class="TABLE_STYLE4">
 														<tr height=20 class="TR_STYLE1">
 															<td align=center height=5 class="TD_STYLE5"></td>
 														</tr>
 													</table>
-													<table id="registerMProceduring" bordercolor=#000000 bordercolorlight=#848284 bordercolordark=#eeeeee border=1 cellspacing=0 cellpadding=0 align=center class="TABLE_STYLE5">
-																														
+													<table id="registerMProceduring" bordercolor=#000000
+														bordercolorlight=#848284 bordercolordark=#eeeeee border=1
+														cellspacing=0 cellpadding=0 align=center
+														class="TABLE_STYLE5">
+
 													</table>
 													<table id="register" align=center class="TABLE_STYLE4">
 														<tr height=20 class="TR_STYLE1">
@@ -528,9 +531,11 @@ BR {
 																width="37%">${manufacture.register}</td>
 															<td bordercolorlight=#848284 bordercolordark=#eeeeee
 																align=right class="TD_STYLE8" width="13%">登记时间：</td>
-																
+
 															<td bordercolor=#DEDBD6 align=left class="TD_STYLE2"
-																width="37%"><fmt:formatDate value="${manufacture.registerTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+																width="37%"><fmt:formatDate
+																	value="${manufacture.registerTime}"
+																	pattern="yyyy-MM-dd HH:mm:ss" /></td>
 														</tr>
 														<tr height=20 class="TR_STYLE1">
 															<td bordercolorlight=#848284 bordercolordark=#eeeeee
@@ -540,12 +545,16 @@ BR {
 															<td bordercolorlight=#848284 bordercolordark=#eeeeee
 																align=right class="TD_STYLE8" width="13%">复核时间：</td>
 															<td bordercolor=#DEDBD6 align=left class="TD_STYLE2"
-																width="37%"><fmt:formatDate value="${manufacture.checkTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+																width="37%"><fmt:formatDate
+																	value="${manufacture.checkTime}"
+																	pattern="yyyy-MM-dd HH:mm:ss" /></td>
 														</tr>
 														<tr height=20 class="TR_STYLE1">
-															<td bordercolorlight=#848284 bordercolordark=#eeeeee align=right class="TD_STYLE8" width="13%">备注&nbsp;&nbsp;&nbsp;&nbsp;：</td>
-															<td bordercolor=#DEDBD6 align=left class="TD_STYLE2" colspan="3" width="87%">${manufacture.manufactureProcedureTag}</textarea>
-															
+															<td bordercolorlight=#848284 bordercolordark=#eeeeee
+																align=right class="TD_STYLE8" width="13%">备注&nbsp;&nbsp;&nbsp;&nbsp;：</td>
+															<td bordercolor=#DEDBD6 align=left class="TD_STYLE2"
+																colspan="3" width="87%">${manufacture.manufactureProcedureTag}</textarea>
+
 															</td>
 														</tr>
 													</table>
@@ -604,16 +613,93 @@ BR {
 				</tr>
 			</tbody>
 		</table>
+		
+		<div id="Myprocedure">
+			
+		</div>
 	</div>
-<script type="text/javascript">
-	$(function(){
-		$("#registerMProceduring").datagrid(
-			url : "<%=request.getContextPath()%>/MProceduring/list.do", //数据请求地址
-			title : "生产过程登记", //标题
-			fitColumns : true, //真正的自动展开/收缩列的大小，以适应网格的宽度，防止水平滚动。
-			striped : true, //是否显示斑马线效果。
-			rownumbers : true, //如果为true，则显示一个行号列。
-			columns :[[]],
-		);
+	<script type="text/javascript">
+		$(function() {
+			var mfgid = $("#mfgid").val();
+			$("#registerMProceduring").datagrid({
+				url : "<%=request.getContextPath()%>/MProceduring/listMProceduring.do?id=" + mfgid, //数据请求地址
+				title : "生产过程登记", //标题
+				fitColumns : true, //真正的自动展开/收缩列的大小，以适应网格的宽度，防止水平滚动。
+				striped : true, //是否显示斑马线效果。
+				rownumbers : true, //如果为true，则显示一个行号列。
+				columns : [[
+					{
+						field : 'procedureName',
+						title : '工序名称',
+						width : 40,
+						align : 'center'
+					},
+					{
+						field : 'labourHourAmount',
+						title : '设计工时数',
+						width : 30,
+						align : 'center'
+					},
+					{
+						field : 'realAmount',
+						title : '实际工时数',
+						width : 30,
+						align : 'center'
+					},
+					{
+						field : 'subtotal',
+						title : '设计工时成本',
+						width : 30,
+						align : 'center'
+					},
+					{
+						field : 'realSubtotal',
+						title : '实际工时成本',
+						width : 30,
+						align : 'center'
+					},
+					{
+						field : 'moduleSubtotal',
+						title : '设计物料成本',
+						width : 30,
+						align : 'center'
+					},
+					{
+						field : 'realModuleSubtotal',
+						title : '实际物料成本',
+						width : 30,
+						align : 'center'
+					},
+					{
+					field : 'itemid',
+					title : '登记',
+					width : 30,
+					align : 'center',
+					formatter : function(value, rowData, rowIndex) {
+						//工序完成标志
+						//G004-0: 未开始
+						//G004-1: 已完成
+						//G004-2: 未完成
+						//G004-3: 已审核
+						var finishTag = rowData["procedureFinishTag"];
+						/* 工序交接标志
+ 						G005-0: 未交接
+						G005-1: 已交接
+						G005-2: 已审核 */
+						var transferTag = rowData["procedureTransferTag"]
+						var id = rowData["id"];
+						if("G004-0"==finishTag){
+							return '<a href="#" class="" onclick="changeFinishTag(\''+id+'\')" >开始登记</a>';					
+						}
+						if("G004-1"==finishTag&&"G005-0"==finishTag){
+							return '<a href="#" class="" onclick="changeTransferTag(\''+id+'\')" >交接登记</a>';
+						}
+						if("G004-1"==finishTag&&"G004-1"==finishTag){
+							return '工序完成';
+						}
+					},
+				},
+			]],
+		});
 	});
 </script>
