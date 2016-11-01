@@ -78,4 +78,8 @@
 	<select id="findById" resultMap="procedure-result">
 		SELECT * FROM M_PROCEDURE WHERE ID = #{id}
 	</select>
+	<!-- lgx -->
+	<select id="findByFinishTag" resultMap="procedure-result">
+		select * from M_PROCEDURE where PROCEDURE_FINISH_TAG=#{finishTag}
+	</select>
 </mapper>
