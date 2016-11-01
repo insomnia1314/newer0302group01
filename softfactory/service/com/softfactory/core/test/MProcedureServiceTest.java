@@ -80,4 +80,13 @@ public class MProcedureServiceTest {
 	  MProcedure m = procedureService.findById(id);
 	  System.out.println(m.getProcedureName());
   }
+  
+  @Test
+  public void testfindByFinishTag(){
+	  String finishTag = "G004-0";
+	  List<MProcedure> l = procedureService.findByFinishTag(finishTag);
+	  for(MProcedure procucts:l){
+		  System.out.println(procucts.getCostPrice()+"-------"+procucts.getId());
+	  }
+  }
 }
