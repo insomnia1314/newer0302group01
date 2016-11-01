@@ -45,4 +45,13 @@ public class MProcedureService {
 	public MProcedure findById(Integer id){
 		return procedureMapper.findById(id);
 	}
+	
+	/**
+	 * 
+	 * @param finishTag
+	 * @return
+	 */
+	public List<MProcedure> findByFinishTag(String finishTag){
+		return procedureMapper.findByFinishTag(finishTag);
+	}
 }
