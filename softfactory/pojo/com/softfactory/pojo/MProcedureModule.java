@@ -31,7 +31,7 @@ public class MProcedureModule implements Serializable {
 	private double subtotal; // 物料小计
 	private double realSubtotal; // 实际物料小计
 	private String productDescribe;// 描述
-	private String amountUnit;
+	private String amountUnit;//单位
 
 	public Integer getId() {
 		return id;
