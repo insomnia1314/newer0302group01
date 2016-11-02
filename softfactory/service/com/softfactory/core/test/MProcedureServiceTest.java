@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.softfactory.core.service.MProcedureService;
 import com.softfactory.core.util.Pager;
 import com.softfactory.pojo.MProcedure;
+import com.softfactory.pojo.MProcedureDTO;
 
 public class MProcedureServiceTest {
   private MProcedureService procedureService;
@@ -83,10 +84,10 @@ public class MProcedureServiceTest {
   
   @Test
   public void testfindByFinishTag(){
-	  String finishTag = "G004-0";
-	  List<MProcedure> l = procedureService.findByFinishTag(finishTag);
-	  for(MProcedure procucts:l){
-		  System.out.println(procucts.getCostPrice()+"-------"+procucts.getId());
+	  String finishTag = "G004-2";
+	  List<MProcedureDTO> l = procedureService.findByFinishTag(finishTag);
+	  for(MProcedureDTO procucts:l){
+		  System.out.println(procucts.toString());
 	  }
   }
 }
