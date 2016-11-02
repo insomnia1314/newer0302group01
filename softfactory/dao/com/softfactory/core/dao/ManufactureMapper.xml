@@ -26,7 +26,6 @@
 		<result property="remark" column="REMARK" />
 		<result property="checkTag" column="CHECK_TAG" />
 		<result property="manufactureProcedureTag" column="MANUFACTURE_PROCEDURE_TAG" />
-		<result property="manufactureTag" column="MANUFACTURE_TAG" />
 	</resultMap>
 
 	<sql id="pageSQLHead">
@@ -69,7 +68,7 @@
 	
 	<sql id="WhereClaseTW">
 		<where>
-			where CHECK_TAG='S001-1' and APPLY_ID = APPLY_ID_GROUP
+			m.CHECK_TAG='S001-1'
 		</where>
 	</sql>
 
@@ -103,7 +102,7 @@
 	<select id="findByTag" resultMap="manufacture-result">
 		<include refid="pageSQLHead" />
 		<include refid="orderBy" />
-		) rn,m.*,a.MANUFACTURE_TAG from M_MANUFACTURE m,M_APPLY a
+		) rn,m.* from M_MANUFACTURE m
 		<include refid="WhereClaseTW" />
 		<include refid="pageSQLFoot" />
 	</select>
