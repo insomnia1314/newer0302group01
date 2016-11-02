@@ -27,5 +27,10 @@
 	<select id="findByMax" resultType="String">
 		select MAX(PAY_ID) from S_PAY
 	</select>
+	
+	<select id="findByPname" resultMap="storeMaxPay-result">
+		select * from S_PAY where REASONEXACT = #{manufactureId}
+	</select>
+
 </mapper>
 	

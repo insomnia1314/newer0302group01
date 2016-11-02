@@ -6,27 +6,15 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * create table M_MANUFACTURE  (
-   ID                   NUMBER(6)                       not null,
-   MANUFACTURE_ID       VARCHAR2(50)                    not null,
-   PRODUCT_ID           VARCHAR2(50)                    not null,
-   PRODUCT_NAME         VARCHAR2(50),
-   AMOUNT               NUMBER(12,2)                    not null,
-   TESTED_AMOUNT        NUMBER(12,2),
-   APPLY_ID_GROUP       VARCHAR2(400)                   not null,
-   PRODUCT_DESCRIBE     VARCHAR2(400),
-   MODULE_COST_PRICE_SUM NUMBER(12,2),
-   REAL_MODULE_COST_PRICE_SUM NUMBER(12,2),
-   LABOUR_COST_PRICE_SUM NUMBER(12,2),
-   REAL_LABOUR_COST_PRICE_SUM NUMBER(12,2),
-   DESIGNER             VARCHAR2(50),
-   REGISTER             VARCHAR2(50),
-   REGISTER_TIME        DATE,
-   CHECKER              VARCHAR2(50),
-   CHECK_TIME           DATE,
-   REMARK               VARCHAR2(400),
-   CHECK_TAG            VARCHAR2(20)                    not null,
-   MANUFACTURE_PROCEDURE_TAG VARCHAR2(20)                    not null,
+ * create table M_MANUFACTURE ( ID NUMBER(6) not null, MANUFACTURE_ID
+ * VARCHAR2(50) not null, PRODUCT_ID VARCHAR2(50) not null, PRODUCT_NAME
+ * VARCHAR2(50), AMOUNT NUMBER(12,2) not null, TESTED_AMOUNT NUMBER(12,2),
+ * APPLY_ID_GROUP VARCHAR2(400) not null, PRODUCT_DESCRIBE VARCHAR2(400),
+ * MODULE_COST_PRICE_SUM NUMBER(12,2), REAL_MODULE_COST_PRICE_SUM NUMBER(12,2),
+ * LABOUR_COST_PRICE_SUM NUMBER(12,2), REAL_LABOUR_COST_PRICE_SUM NUMBER(12,2),
+ * DESIGNER VARCHAR2(50), REGISTER VARCHAR2(50), REGISTER_TIME DATE, CHECKER
+ * VARCHAR2(50), CHECK_TIME DATE, REMARK VARCHAR2(400), CHECK_TAG VARCHAR2(20)
+ * not null, MANUFACTURE_PROCEDURE_TAG VARCHAR2(20) not null,
  */
 public class Manufacture implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -45,20 +33,19 @@ public class Manufacture implements Serializable {
 	private double realLabourCostPriceSum;// 实际工时总成本
 	private String designer; // 工单制定人
 	private String register; // 登记人
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date registerTime; // 登记时间
 	private String checker; // 审核人
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date checkTime; // 审核时间
 	private String remark; // 备注
 	private String checkTag; // 审核标志
 	private String manufactureProcedureTag;// 生产过程标记
-	private String manufactureTag;//派工单
-	
-	
-	
+	private String manufactureTag;// 派工单
+	private String payId;
+
 	public String getManufactureTag() {
 		return manufactureTag;
 	}
@@ -229,6 +216,14 @@ public class Manufacture implements Serializable {
 
 	public void setManufactureProcedureTag(String manufactureProcedureTag) {
 		this.manufactureProcedureTag = manufactureProcedureTag;
+	}
+
+	public String getPayId() {
+		return payId;
+	}
+
+	public void setPayId(String payId) {
+		this.payId = payId;
 	}
 
 }
