@@ -12,4 +12,6 @@ public interface MdetailsMapper {
 	List<Mdetails> findByPId(Integer id);
 	
 	Mdetails findById(Integer id);
+	
+	Mdetails findByPname(String productName);
 }

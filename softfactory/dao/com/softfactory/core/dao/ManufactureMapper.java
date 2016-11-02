@@ -15,7 +15,7 @@ import com.softfactory.pojo.StorePayDetails;
 @Repository("manufactureMapper")
 public interface ManufactureMapper {
 	
-	@Update("update M_MANUFACTURE set CHECK_TAG=#{checkTag},DESIGNER=#{resigner},REGISTER=#{register},CHECKER=#{checker},REMARK=#{remark} where ID = #{id}")
+	@Update("update M_MANUFACTURE set CHECK_TAG=#{checkTag},DESIGNER=#{designer},REGISTER=#{register},CHECKER=#{checker},REMARK=#{remark} where ID = #{id}")
 	int modify(Manufacture mf);
 	
 	@Insert("insert into M_MANUFACTURE(ID,MANUFACTURE_ID,PRODUCT_ID,PRODUCT_NAME,AMOUNT,"
@@ -31,15 +31,15 @@ public interface ManufactureMapper {
 	int add(Manufacture mf);
 	
 	@Insert("insert into S_PAY(ID,PAY_ID,REASON,REASONEXACT,AMOUNT_SUM,COST_PRICE_SUM,REMARK,REGISTER,"
-			+ "REGISTER_TIME,CHECK_TAG,STORE_TAG) values(#{sid},#{payId},#{reason},#{reasonExact},"
+			+ "REGISTER_TIME,CHECK_TAG,STORE_TAG) values(#{id},#{payId},#{reason},#{reasonExact},"
 			+ "#{amountSum},#{costPriceSum},#{remark},#{register},#{registerTime},#{checkTag},#{storeTag})")
-	@SelectKey(statement = "select SEQ_S_PAY.nextval from dual", keyProperty = "sid", resultType = int.class, before = true)
+	@SelectKey(statement = "select SEQ_S_PAY.nextval from dual", keyProperty = "id", resultType = int.class, before = true)
 	int addStorePay(StoreMaxPay sp);
 	
-	@Insert("insert into S_PAY_DETAILS(ID,PARENT_ID,PRODUCT_ID,PRODUCT_NAME,AMOUNT,AMOUNT_UNIT,"
-			+ "COST_PRICE,SUBTOTAL,PAY_TAG) values(#{did},#{parentId},#{productId},#{productName},"
-			+ "#{amount},#{amountUnit},#{costPrice},#{subtotal},#{dispatch})")
-	@SelectKey(statement = "select SEQ_S_PAY_DETAILS.nextval from dual", keyProperty = "did", resultType = int.class, before = true)
+	@Insert("insert into S_PAY_DETAILS(ID,PARENT_ID,PRODUCT_ID,PRODUCT_NAME,PRODUCT_DESCRIBE,AMOUNT,AMOUNT_UNIT,"
+			+ "COST_PRICE,SUBTOTAL,DISPATCH) values(#{id},#{parentId},#{productId},#{productName},"
+			+ "#{productDescribe},#{amount},#{amountUnit},#{costPrice},#{subtotal},#{dispatch})")
+	@SelectKey(statement = "select SEQ_S_PAY_DETAILS.nextval from dual", keyProperty = "id", resultType = int.class, before = true)
 	int addStorePayDetails(StorePayDetails spd);
 	
 	List<Manufacture> findPager(
