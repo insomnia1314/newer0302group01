@@ -82,7 +82,7 @@ public class MProcedureServiceTest {
 	  System.out.println(m.getProcedureName());
   }
   
-  @Test
+  @Test 
   public void testfindByFinishTag(){
 	  String finishTag = "G004-2";
 	  List<MProcedureDTO> l = procedureService.findByFinishTag(finishTag);
