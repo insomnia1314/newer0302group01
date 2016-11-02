@@ -31,4 +31,8 @@
 		p.AMOUNT_UNIT,p.COST_PRICE,p.SUBTOTAL from M_DESIGN_PROCEDURE_MODULE p,M_DESIGN_PROCEDURE m,M_DESIGN_PROCEDURE_DETAILS d
 		 where p.ID = #{id} and m.id = p.PARENT_ID and p.id = d.parent_id
 	</select>
+	
+	<select id="findByPname" resultMap="mdetails-result">
+		select * from M_DESIGN_PROCEDURE_MODULE where PRODUCT_NAME = #{productName}
+	</select>
 </mapper>

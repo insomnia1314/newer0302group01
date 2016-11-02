@@ -22,4 +22,8 @@ public class MdetailsService {
 	public Mdetails findById(Integer id){
 		return mdetailsMapper.findById(id);
 	}
+	
+	public Mdetails findByPname(String productName){
+		return mdetailsMapper.findByPname(productName);
+	}
 }

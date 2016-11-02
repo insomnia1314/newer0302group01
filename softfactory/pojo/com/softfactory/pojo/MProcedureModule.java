@@ -1,6 +1,7 @@
 package com.softfactory.pojo;
 
 import java.io.Serializable;
+
 /*
  * create table M_PROCEDURE_MODULE  (
    ID                   NUMBER(6)                       not null,
@@ -29,6 +30,7 @@ public class MProcedureModule implements Serializable {
 	private double realAmount; // 实际数量
 	private double subtotal; // 物料小计
 	private double realSubtotal; // 实际物料小计
+	private String productDescribe;// 描述
 
 	public Integer getId() {
 		return id;
@@ -116,6 +118,14 @@ public class MProcedureModule implements Serializable {
 
 	public void setRealSubtotal(double realSubtotal) {
 		this.realSubtotal = realSubtotal;
+	}
+
+	public String getProductDescribe() {
+		return productDescribe;
+	}
+
+	public void setProductDescribe(String productDescribe) {
+		this.productDescribe = productDescribe;
 	}
 
 }
