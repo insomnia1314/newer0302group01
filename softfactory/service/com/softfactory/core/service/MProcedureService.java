@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.softfactory.core.dao.MProcedureMapper;
 import com.softfactory.core.util.Pager;
 import com.softfactory.pojo.MProcedure;
+import com.softfactory.pojo.MProcedureDTO;
 
 @Service("mprocedureService")
 public class MProcedureService {
@@ -51,7 +52,7 @@ public class MProcedureService {
 	 * @param finishTag
 	 * @return
 	 */
-	public List<MProcedure> findByFinishTag(String finishTag){
+	public List<MProcedureDTO> findByFinishTag(String finishTag){
 		return procedureMapper.findByFinishTag(finishTag);
 	}
 }

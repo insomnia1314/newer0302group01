@@ -23,6 +23,46 @@
 		<result property="procedureFinishTag" column="PROCEDURE_FINISH_TAG" />
 		<result property="procedureTransferTag" column="PROCEDURE_TRANSFER_TAG" />
 	</resultMap>
+	
+	<resultMap type="com.softfactory.pojo.MProcedureDTO" id="procedureDTO-result">
+		<result property="mprid" column="MPRID" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="detailsNumber" column="DETAILS_NUMBER" />
+		<result property="procedureId" column="PROCEDURE_ID" />
+		<result property="procedureName" column="PROCEDURE_NAME" />
+		<result property="labourHourAmount" column="LABOUR_HOUR_AMOUNT" />
+		<result property="realLabourHourAmount" column="REAL_LABOUR_HOUR_AMOUNT" />
+		<result property="subtotal" column="SUBTOTAL" />
+		<result property="realSubtotal" column="REAL_SUBTOTAL" />
+		<result property="moduleSubtotal" column="MODULE_SUBTOTAL" />
+		<result property="realModuleSubtotal" column="REAL_MODULE_SUBTOTAL" />
+		<result property="costPrice" column="COST_PRICE" />
+		<result property="demandAmount" column="DEMAND_AMOUNT" />
+		<result property="realAmount" column="REAL_AMOUNT" />
+		<result property="procedureFinishTag" column="PROCEDURE_FINISH_TAG" />
+		<result property="procedureTransferTag" column="PROCEDURE_TRANSFER_TAG" />
+		<!-- ********************************* -->
+		<result property="manid" column="MANID" />
+		<result property="manufactureId" column="MANUFACTURE_ID" />
+		<result property="productId" column="PRODUCT_ID" />
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="amount" column="AMOUNT" />
+		<result property="testedAmount" column="TESTED_AMOUNT" />
+		<result property="applyIdGroup" column="APPLY_ID_GROUP" />
+		<result property="productDescribe" column="PRODUCT_DESCRIBE" />
+		<result property="moduleCostPriceSum" column="MODULE_COST_PRICE_SUM" />
+		<result property="realModuleCostPriceSum" column="REAL_MODULE_COST_PRICE_SUM" />
+		<result property="labourCostPriceSum" column="LABOUR_COST_PRICE_SUM" />
+		<result property="realLabourCostPriceSum" column="REAL_LABOUR_COST_PRICE_SUM" />
+		<result property="designer" column="DESIGNER" />
+		<result property="register" column="REGISTER" />
+		<result property="registerTime" column="REGISTER_TIME" />
+		<result property="checker" column="CHECKER" />
+		<result property="checkTime" column="CHECK_TIME" />
+		<result property="remark" column="REMARK" />
+		<result property="checkTag" column="CHECK_TAG" />
+		<result property="manufactureProcedureTag" column="MANUFACTURE_PROCEDURE_TAG" />
+	</resultMap>
 
 	<sql id="pageSQLHead">
 		select *
@@ -79,7 +119,7 @@
 		SELECT * FROM M_PROCEDURE WHERE ID = #{id}
 	</select>
 	<!-- lgx -->
-	<select id="findByFinishTag" resultMap="procedure-result">
-		select * from M_PROCEDURE where PROCEDURE_FINISH_TAG=#{finishTag}
+	<select id="findByFinishTag" resultMap="procedureDTO-result">
+		select MM.ID MANID,MP.ID MPRID,MM.*,MP.*  from M_MANUFACTURE MM,M_PROCEDURE MP WHERE MM.ID=MP.PARENT_ID AND MP.PROCEDURE_FINISH_TAG=#{finishTag}
 	</select>
 </mapper>

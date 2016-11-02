@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.SelectKey;
 import org.springframework.stereotype.Repository;
 
 import com.softfactory.pojo.MProcedure;
+import com.softfactory.pojo.MProcedureDTO;
 
 /**
  * 生产工序记录
@@ -49,7 +50,7 @@ public interface MProcedureMapper {
 	
 	long findPagerTotal(@Param("id") Integer id,@Param("procedureName") String procedureName);
 	
-	/**
+	/** 
 	 * @author GuangxiangLong
 	 * @return 
 	 */
@@ -64,7 +65,7 @@ public interface MProcedureMapper {
 	MProcedure findById(Integer id);
 	
 	/**
-	 * 
+	 * @author GuangxiangLong
 	 */
-	List<MProcedure> findByFinishTag(String finishTag);
+	List<MProcedureDTO> findByFinishTag(String finishTag);
 }
