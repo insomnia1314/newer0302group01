@@ -26,6 +26,7 @@
 		<result property="remark" column="REMARK" />
 		<result property="checkTag" column="CHECK_TAG" />
 		<result property="manufactureProcedureTag" column="MANUFACTURE_PROCEDURE_TAG" />
+		<result property="manufactureTag" column="MANUFACTURE_TAG" />
 	</resultMap>
 
 	<sql id="pageSQLHead">
@@ -65,6 +66,12 @@
 			</if>
 		</where>
 	</sql>
+	
+	<sql id="WhereClaseTW">
+		<where>
+			where CHECK_TAG='S001-1' and APPLY_ID = APPLY_ID_GROUP
+		</where>
+	</sql>
 
 	<sql id="pageSQLFoot">
     <![CDATA[ ) where rn > #{pageno} and rn <= #{pagesize} ]]>
@@ -89,6 +96,15 @@
 		<include refid="orderBy" />
 		) rn,m.* from M_MANUFACTURE m
 		<include refid="WhereClaseLgx" />
+		<include refid="pageSQLFoot" />
+	</select>
+	
+	<!-- 查询审核通过了的 -->
+	<select id="findByTag" resultMap="manufacture-result">
+		<include refid="pageSQLHead" />
+		<include refid="orderBy" />
+		) rn,m.*,a.MANUFACTURE_TAG from M_MANUFACTURE m,M_APPLY a
+		<include refid="WhereClaseTW" />
 		<include refid="pageSQLFoot" />
 	</select>
 	

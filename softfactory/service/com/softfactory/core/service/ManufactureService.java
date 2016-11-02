@@ -75,6 +75,13 @@ public class ManufactureService {
 		return pager;
 	}
 	
+	public Pager<Manufacture> findByTag(Integer pageno, Integer pagesize, String sort, String order,Manufacture manufacture){
+		Pager<Manufacture> pager = new Pager<Manufacture>();
+		pager.setRows(manufactureMapper.findByTag(pageno, pagesize, sort, order, manufacture));
+		pager.setTotal(manufactureMapper.findPassedMFGTotal(manufacture));
+		return pager;
+	}
+	
 	/**
 	 * 通过ID加载单条数据
 	 * @author GuangxiangLong

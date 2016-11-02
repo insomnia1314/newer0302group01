@@ -55,9 +55,18 @@ public class Manufacture implements Serializable {
 	private String remark; // 备注
 	private String checkTag; // 审核标志
 	private String manufactureProcedureTag;// 生产过程标记
+	private String manufactureTag;//派工单
 	
 	
 	
+	public String getManufactureTag() {
+		return manufactureTag;
+	}
+
+	public void setManufactureTag(String manufactureTag) {
+		this.manufactureTag = manufactureTag;
+	}
+
 	public Manufacture() {
 		super();
 	}
