@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.softfactory.core.dao.ManufactureMapper">
-
+ 
 	<resultMap type="com.softfactory.pojo.Manufacture" id="manufacture-result">
 		<id property="id" column="ID" />
 		<result property="manufactureId" column="MANUFACTURE_ID" />
