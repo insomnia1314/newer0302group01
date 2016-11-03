@@ -71,4 +71,7 @@
 		select count(id) from M_PROCEDURE_MODULING
 		<include refid="WhereClase" />
 	</select>
+	<select id="findByParentIdAndProductId" resultMap="MPMMap">
+		select * from M_PROCEDURE_MODULING WHERE PARENT_ID=#{parentId} AND PRODUCT_ID=#{ProductId}
+	</select>
 </mapper>

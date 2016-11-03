@@ -12,6 +12,7 @@
 		<%@ include file="commons/meta.jsp"%>
 		<script src="js/Clock.js"></script>
 		<script src="js/index.js"></script>
+		<script src="<%=request.getContextPath()%>/js/myLgx.js"></script>
 		<style>
 #logorighttop {
 	PADDING-RIGHT: 50px;

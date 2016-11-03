@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.softfactory.pojo.MProcedureModule;
@@ -32,4 +33,12 @@ public interface MProcedureModuleMapper {
 	 * @return
 	 */
 	List<MProcedureModule> findByPrentId(Integer prentId);
+	
+	/**
+	 * @author GuangxiangLong
+	 * @param pm
+	 * @return
+	 */
+	@Update("update M_PROCEDURE_MODULE set REAL_AMOUNT=#{realAmount} ,REAL_SUBTOTAL=#{realSubtotal} WHERE ID=#{id}")
+	int update(MProcedureModule pm);
 }

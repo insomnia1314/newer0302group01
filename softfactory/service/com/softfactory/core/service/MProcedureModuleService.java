@@ -36,4 +36,8 @@ public class MProcedureModuleService {
 	public List<MProcedureModule> findByPrentId(Integer prentId){
 		return procedureModuleMapper.findByPrentId(prentId);
 	}
+	
+	public int update(MProcedureModule pm){
+		return procedureModuleMapper.update(pm);
+	}
 }

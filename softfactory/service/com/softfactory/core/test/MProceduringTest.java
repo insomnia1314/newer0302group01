@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.softfactory.core.service.MProceduringService;
 import com.softfactory.core.util.Pager;
+import com.softfactory.pojo.MProcedureModuling;
 import com.softfactory.pojo.MProceduring;
 
 public class MProceduringTest {
@@ -97,4 +98,11 @@ public class MProceduringTest {
 //			System.out.println(m);
 //		}
 //	}
+	@Test
+	public void testParentIDAndProcedureId(){
+		Integer parentid = 1;
+		String procedureId = "a";
+		MProceduring m = mProceduringService.findByPrentIdAndProcedureId(parentid, procedureId);
+		System.out.println(m.toString());
+	}
 }

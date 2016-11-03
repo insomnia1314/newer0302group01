@@ -36,5 +36,9 @@ public class MProcedureModulingService {
 	public MProcedureModuling findById(Integer mPId) {
 		return mProcedureModulingMapper.findById(mPId);
 	}
-
+	
+	public MProcedureModuling findByParentIdAndProductId(Integer parentId,String ProductId){
+		return mProcedureModulingMapper.findByParentIdAndProductId(parentId, ProductId);
+	}
+	
 }

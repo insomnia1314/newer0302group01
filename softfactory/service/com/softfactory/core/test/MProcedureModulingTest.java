@@ -82,4 +82,12 @@ public class MProcedureModulingTest {
 	public void testDel() {
 		mProcedureModulingService.remove(9);
 	}
+	
+	@Test
+	public void testfindByParentIdAndProductId(){
+		Integer parentId = 8;
+		String ProductId = "0001";
+		MProcedureModuling m = mProcedureModulingService.findByParentIdAndProductId(parentId, ProductId);
+		System.out.println(m);
+	}
 }

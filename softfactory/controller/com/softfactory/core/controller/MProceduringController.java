@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.runners.Parameterized.Parameter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import com.softfactory.core.service.ManufactureService;
 import com.softfactory.core.util.JsonDateValueProcessor;
 import com.softfactory.core.util.Pager;
 import com.softfactory.pojo.MProcedure;
+import com.softfactory.pojo.MProcedureDTO;
 import com.softfactory.pojo.MProcedureModule;
 import com.softfactory.pojo.MProcedureModuling;
 import com.softfactory.pojo.MProceduring;
@@ -31,7 +33,7 @@ import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
 
-/** 
+/**
  * 生产工序记录
  * 
  * @author GuangxiangLong
@@ -43,10 +45,10 @@ public class MProceduringController {
 
 	@Resource(name = "mProceduringService")
 	private MProceduringService mProceduringService;
-	
-	@Resource(name="mProcedureModulingService")
+
+	@Resource(name = "mProcedureModulingService")
 	private MProcedureModulingService mProcedureModulingService;
-	
+
 	@Resource(name = "manufactureService")
 	private ManufactureService manufactureService;
 
@@ -55,8 +57,7 @@ public class MProceduringController {
 
 	@Resource(name = "mprocedureModuleService")
 	private MProcedureModuleService mProcedureModuleService;
-	
-	
+
 	/**
 	 * EasyUI加载通过审核的生产计划
 	 * 
@@ -190,14 +191,16 @@ public class MProceduringController {
 
 	/**
 	 * 产生一条生产记录
+	 * 
 	 * @param response
 	 * @param m
 	 * @param MPMjsonObj
 	 */
-	@RequestMapping("/registerProceduring")																	
-	public void registerProceduring(HttpServletResponse response, MProceduring m, String MPMjsonObj,Integer mpprentId) {
-		if(null != m){
-			if(null == m.getProcedureDescribe()){
+	@RequestMapping("/registerProceduring")
+	public void registerProceduring(HttpServletResponse response, MProceduring m, String MPMjsonObj,
+			Integer mpprentId) {
+		if (null != m) {
+			if (null == m.getProcedureDescribe()) {
 				m.setProcedureDescribe("没有描述信息");
 			}
 			mProceduringService.add(m);
@@ -208,17 +211,17 @@ public class MProceduringController {
 			int iSize = jsonArray.size();
 			for (int i = 0; i < iSize; i++) {
 				JSONObject jsonObj = jsonArray.getJSONObject(i);
-				Integer id = Integer.valueOf((String) jsonObj.get("id")) ;
-				Integer num = Integer.valueOf((String) jsonObj.get("val")) ;
-				for(int j =0;j<l.size();j++){
-					if(l.get(j).getId()==id){
+				Integer id = Integer.valueOf((String) jsonObj.get("id"));
+				Integer num = Integer.valueOf((String) jsonObj.get("val"));
+				for (int j = 0; j < l.size(); j++) {
+					if (l.get(j).getId() == id) {
 						MProcedureModuling mml = new MProcedureModuling();
 						mml.setParentId(m.getmPMId());
-						mml.setDetailsNumber(m.getDetailsNumber());
-						mml.setProducId(m.getProcedureId());
-						mml.setProductName(m.getProcedureName());
-						mml.setCostPrice(m.getCostPrice());
-						mml.setSubtotal((num*m.getCostPrice()));
+						mml.setDetailsNumber(l.get(i).getDetailsNumber());
+						mml.setProducId(l.get(i).getProductId());
+						mml.setProductName(l.get(i).getProductName());
+						mml.setCostPrice(l.get(i).getCostPrice());
+						mml.setSubtotal((num * l.get(i).getSubtotal()));
 						mml.setAmount(num);
 						mProcedureModulingService.add(mml);
 						break;
@@ -228,6 +231,142 @@ public class MProceduringController {
 			PrintWriter out = response.getWriter();
 			// 向客户端响应json数据
 			out.println("登记成功，请等待审核");
+			out.flush();
+			out.close();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 加载等待审核工序的方法
+	 * 
+	 * @param response
+	 */
+	@RequestMapping("/listPassedMProceduring")
+	public void listPassedMProceduring(HttpServletResponse response) {
+		String finishTag = "G004-2";
+		try {
+			List<MProcedureDTO> l = mProcedureService.findByFinishTag(finishTag);
+			JsonConfig jsonConfig = new JsonConfig();
+			// 处理日期类型的数据
+			jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
+			// 排除 某个/多个 字段(这些字段不在 json 数据中显示)
+			// jsonConfig.set (new String[]{"hiredate"});
+			// 把 Java集合转换为json格式的数据
+			JSONArray jsonObj = JSONArray.fromObject(l, jsonConfig);
+			// JSONObject jsonObj = (JSONObject) JSONSerializer.toJSON(p,
+			// jsonConfig);
+			// 实例化打印流
+			PrintWriter out = response.getWriter();
+			// 向客户端响应json数据
+			out.println(jsonObj.toString());
+			System.out.println(jsonObj.toString());
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 跳转工序复核
+	 * 
+	 * @param modelMap
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/jumpChangeRechekerFinishTag")
+	public String jumpChangeRechekerFinishTag(ModelMap modelMap, Integer id) {
+		String finishTag = "G004-2";
+		List<MProcedureDTO> l = mProcedureService.findByFinishTag(finishTag);
+		for (MProcedureDTO mpDTO : l) {
+			if (mpDTO.getMprid() == id) {
+				modelMap.put("mpDTO", mpDTO);
+				break;
+			}
+		}
+		return "mproceduring/mpcrechek";
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping("loadChangeFinishTag")
+	public String loadChangeFinishTag(ModelMap modelMap, Integer id) {
+		String finishTag = "G004-2";
+		List<MProcedureDTO> l = mProcedureService.findByFinishTag(finishTag);
+		for (MProcedureDTO mpDTO : l) {
+			if (mpDTO.getMprid() == id) {
+				modelMap.put("mpDTO", mpDTO);
+				break;
+			}
+		}
+		return "mproceduring/mpcrecheckmodule";
+	}
+
+	/**
+	 * 
+	 */
+	@RequestMapping("changeProceduring")
+	public void changeProceduring(HttpServletResponse response, MProcedure mprocedure, String MPMingjsonObj,
+			MProceduring mpring) {
+		try {
+			MProceduring mmp = mProceduringService.findByPrentIdAndProcedureId(mprocedure.getParentId(),
+					mprocedure.getProcedureId());
+			System.out.println(mmp.toString());
+			System.out.println(MPMingjsonObj);
+			System.out.println(mpring.getChecker());
+			System.out.println(mpring.getCheckTime());
+			// 添加复核
+			mmp.setChecker(mpring.getChecker());
+			mmp.setCheckTime(mpring.getCheckTime());
+			mprocedure = mProcedureService.findById(mprocedure.getId());
+			double realModulesubtotal = 0;
+			// 更改物料表
+			List<MProcedureModule> l = mProcedureModuleService.findByPrentId(mprocedure.getId());
+			JSONArray jsonArray = JSONArray.fromObject(MPMingjsonObj);
+			int iSize = jsonArray.size();
+			for (int i = 0; i < iSize; i++) {
+				JSONObject jsonObj = jsonArray.getJSONObject(i);
+				Integer id = Integer.valueOf((String) jsonObj.get("id"));
+				Integer num = Integer.valueOf((String) jsonObj.get("val"));
+				System.out.println(num);
+				for (int j = 0; j < l.size(); j++) {
+					if (l.get(j).getId() == id && l.get(j).getRealAmount() != num) {
+						// 修改生产物料
+						MProcedureModule m = l.get(j);
+						m.setRealAmount(num);
+						m.setRealSubtotal(num * m.getCostPrice());
+						// 持久化修改生产物料
+						mProcedureModuleService.update(m);
+						// 修改生产物料记录
+						MProcedureModuling mpromduling = mProcedureModulingService.findByParentIdAndProductId(mmp.getmPMId(), m.getProductId());
+						if(null != mpromduling){
+							mpromduling.setAmount(num);
+							mpromduling.setSubtotal(num * m.getCostPrice());
+							// 持久化修改生产物料记录
+							mProcedureModulingService.update(mpromduling);
+						}
+					}
+					realModulesubtotal += l.get(j).getRealSubtotal();
+				}
+			}
+			//工序合格数量
+			mprocedure.setRealAmount(mprocedure.getRealAmount());
+			//工序物料成本
+			mprocedure.setRealModuleSubtotal(realModulesubtotal);
+			// 工序已审核
+			mprocedure.setProcedureFinishTag("G004-3");
+			//工序已交接
+			mprocedure.setProcedureTransferTag("G005-1");
+			mProcedureService.update(mprocedure);
+			PrintWriter out = response.getWriter();
+			// 向客户端响应json数据
+			out.println("审核已经完成");
 			out.flush();
 			out.close();
 		} catch (NumberFormatException e) {

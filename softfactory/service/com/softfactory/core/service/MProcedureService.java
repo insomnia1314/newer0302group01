@@ -55,4 +55,8 @@ public class MProcedureService {
 	public List<MProcedureDTO> findByFinishTag(String finishTag){
 		return procedureMapper.findByFinishTag(finishTag);
 	}
+	
+	public int update(MProcedure pd){
+		return procedureMapper.update(pd);
+	}
 }

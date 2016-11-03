@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.softfactory.core.dao.MProceduringMapper;
 import com.softfactory.core.util.Pager;
+import com.softfactory.pojo.MProcedureModuling;
 import com.softfactory.pojo.MProceduring;
 
 @Service("mProceduringService")
@@ -70,5 +71,15 @@ public class MProceduringService {
 	 */
 	public int del(Integer mPMId) {
 		return mProceduringMapper.del(mPMId);
+	}
+	
+	/**
+	 * 
+	 * @param parentid
+	 * @param procedureId
+	 * @return
+	 */
+	public MProceduring findByPrentIdAndProcedureId(Integer parentid,String procedureId){
+		return mProceduringMapper.findByPrentIdAndProcedureId(parentid, procedureId);
 	}
 }

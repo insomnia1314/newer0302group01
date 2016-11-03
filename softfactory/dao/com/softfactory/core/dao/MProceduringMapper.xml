@@ -85,4 +85,8 @@
 		select count(id) from M_PROCEDURING MP
 		<include refid="WhereClase" />
 	</select>
+	
+	<select id="findByPrentIdAndProcedureId" resultMap="MPMap">
+		select * from M_PROCEDURING WHERE PARENT_ID =#{parentid} AND PROCEDURE_ID= #{procedureId}
+	</select>
 </mapper>
