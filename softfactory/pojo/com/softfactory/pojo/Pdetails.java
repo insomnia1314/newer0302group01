@@ -13,8 +13,17 @@ public class Pdetails implements Serializable {
 	private double labourHourAmount;// 工时数
 	private double costPrice; // 单位工时成本
 	private double subtotal; // 工时成本小计
+	private double moduleSubtotal;// MODULE_SUBTOTAL
 	private String productId;// 产品编号
 	private String designId;// 设计编号
+
+	public double getModuleSubtotal() {
+		return moduleSubtotal;
+	}
+
+	public void setModuleSubtotal(double moduleSubtotal) {
+		this.moduleSubtotal = moduleSubtotal;
+	}
 
 	public Integer getId() {
 		return id;

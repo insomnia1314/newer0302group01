@@ -16,11 +16,12 @@
 		<result property="subtotal" column="SUBTOTAL" />
 		<result property="productId" column="PRODUCT_ID" />
 		<result property="designId" column="DESIGN_ID" />
+		<result property="moduleSubtotal" column="MODULE_SUBTOTAL" />
 	</resultMap>
 
 	<select id="findByPId" resultMap="pdetails-result">
 		select ID,PARENT_ID,PROCEDURE_NAME,PROCEDURE_ID,PROCEDURE_DESCRIBE,LABOUR_HOUR_AMOUNT,
-		COST_PRICE,SUBTOTAL from M_DESIGN_PROCEDURE_DETAILS where PARENT_ID = 
+		COST_PRICE,SUBTOTAL,MODULE_SUBTOTAL from M_DESIGN_PROCEDURE_DETAILS where PARENT_ID = 
 		(select id from M_DESIGN_PROCEDURE where PRODUCT_ID = #{productId})
 	</select>
 	
