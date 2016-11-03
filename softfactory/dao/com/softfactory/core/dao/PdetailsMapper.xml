@@ -15,6 +15,7 @@
 		<result property="costPrice" column="COST_PRICE" />
 		<result property="subtotal" column="SUBTOTAL" />
 		<result property="productId" column="PRODUCT_ID" />
+		<result property="designId" column="DESIGN_ID" />
 	</resultMap>
 
 	<select id="findByPId" resultMap="pdetails-result">
@@ -22,4 +23,9 @@
 		COST_PRICE,SUBTOTAL from M_DESIGN_PROCEDURE_DETAILS where PARENT_ID = 
 		(select id from M_DESIGN_PROCEDURE where PRODUCT_ID = #{productId})
 	</select>
+	
+	<select id="findById" resultMap="pdetails-result">
+		select m.*,d.DESIGN_ID from M_DESIGN_PROCEDURE_DETAILS m,M_DESIGN_PROCEDURE d where m.id = #{id} and m.PARENT_ID = d.id
+	</select>
+	
 </mapper>

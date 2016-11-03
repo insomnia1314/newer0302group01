@@ -10,4 +10,6 @@ import com.softfactory.pojo.Pdetails;
 public interface PdetailsMapper {
 	
 	List<Pdetails> findByPId(String productId);
+	
+	Pdetails findById(Integer id);
 }

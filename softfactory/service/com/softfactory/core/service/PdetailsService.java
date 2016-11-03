@@ -17,4 +17,8 @@ public class PdetailsService {
 	public List<Pdetails> findByPId(String productId) {
 		return pdetailsMapper.findByPId(productId);
 	}
+	
+	public Pdetails findById(Integer id){
+		return pdetailsMapper.findById(id);
+	}
 }

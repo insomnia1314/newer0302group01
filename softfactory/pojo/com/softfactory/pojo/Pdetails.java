@@ -14,6 +14,7 @@ public class Pdetails implements Serializable {
 	private double costPrice; // 单位工时成本
 	private double subtotal; // 工时成本小计
 	private String productId;// 产品编号
+	private String designId;// 设计编号
 
 	public Integer getId() {
 		return id;
@@ -85,6 +86,14 @@ public class Pdetails implements Serializable {
 
 	public void setProductId(String productId) {
 		this.productId = productId;
+	}
+
+	public String getDesignId() {
+		return designId;
+	}
+
+	public void setDesignId(String designId) {
+		this.designId = designId;
 	}
 
 }
