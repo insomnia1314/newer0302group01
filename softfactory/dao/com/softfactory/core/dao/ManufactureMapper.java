@@ -15,7 +15,7 @@ import com.softfactory.pojo.StorePayDetails;
 @Repository("manufactureMapper")
 public interface ManufactureMapper {
 	
-	@Update("update M_MANUFACTURE set CHECK_TAG=#{checkTag},DESIGNER=#{designer},REGISTER=#{register},CHECKER=#{checker},REMARK=#{remark} where ID = #{id}")
+	@Update("update M_MANUFACTURE set CHECK_TAG=#{checkTag},MANUFACTURE_PROCEDURE_TAG=#{manufactureProcedureTag},DESIGNER=#{designer},REGISTER=#{register},CHECKER=#{checker},REMARK=#{remark} where ID = #{id}")
 	int modify(Manufacture mf);
 	
 	@Insert("insert into M_MANUFACTURE(ID,MANUFACTURE_ID,PRODUCT_ID,PRODUCT_NAME,AMOUNT,"
