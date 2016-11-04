@@ -1,6 +1,6 @@
 ----------------------------------------------------
 -- Spring (4.1.0) + mybatis (3.3.0) + Oracle 11g  --
--- å·¥å‚æ¡†æ¶åŸºæœ¬è¡¨                                                                                                --
+-- ¹¤³§¿ò¼Ü»ù±¾±í                                                                                                --
 -- Created by SONG on 2016-09-21 16:21:21         --
 ----------------------------------------------------
 
@@ -16,21 +16,21 @@ create table SYS_CODES
 )
 ;
 comment on table SYS_CODES
-  is 'åŸºç¡€ä»£ç è¡¨';
+  is '»ù´¡´úÂë±í';
 comment on column SYS_CODES.ID
-  is 'åŸºç¡€ä»£ç è¡¨åºå·ï¼Œä¸»é”®';
+  is '»ù´¡´úÂë±íĞòºÅ£¬Ö÷¼ü';
 comment on column SYS_CODES.PARENT_ID
-  is 'çˆ¶çº§åºå·';
+  is '¸¸¼¶ĞòºÅ';
 comment on column SYS_CODES.CODE_ID
-  is 'ä»£ç ç¼–å·';
+  is '´úÂë±àºÅ';
 comment on column SYS_CODES.NAME
-  is 'ä»£ç åç§°';
+  is '´úÂëÃû³Æ';
 comment on column SYS_CODES.STATUS
-  is 'çŠ¶æ€';
+  is '×´Ì¬';
 comment on column SYS_CODES.DEF_VALUE
-  is 'é»˜è®¤å€¼';
+  is 'Ä¬ÈÏÖµ';
 comment on column SYS_CODES.DESCN
-  is 'è¯´æ˜';
+  is 'ËµÃ÷';
 alter table SYS_CODES
   add constraint PK_SYS_CODES primary key (ID);
 alter table SYS_CODES
@@ -50,21 +50,21 @@ create table SYS_LOGS
 )
 ;
 comment on table SYS_LOGS
-  is 'æ—¥å¿—ä¿¡æ¯';
+  is 'ÈÕÖ¾ĞÅÏ¢';
 comment on column SYS_LOGS.ID
-  is 'æ—¥å¿—åºå·ï¼Œä¸»é”®';
+  is 'ÈÕÖ¾ĞòºÅ£¬Ö÷¼ü';
 comment on column SYS_LOGS.LOGIN_ID
-  is 'ç™»é™†ç¼–å·';
+  is 'µÇÂ½±àºÅ';
 comment on column SYS_LOGS.PRIORITY
-  is 'æ—¥å¿—çº§åˆ«';
+  is 'ÈÕÖ¾¼¶±ğ';
 comment on column SYS_LOGS.LOG_DATE
-  is 'æ—¥å¿—è®°å½•æ—¶é—´';
+  is 'ÈÕÖ¾¼ÇÂ¼Ê±¼ä';
 comment on column SYS_LOGS.CLASS
-  is 'ç”¨äºå†™æ—¥å¿—çš„ç±»çš„åç§°';
+  is 'ÓÃÓÚĞ´ÈÕÖ¾µÄÀàµÄÃû³Æ';
 comment on column SYS_LOGS.METHOD
-  is 'è¢«è®°å½•åˆ°æ—¥å¿—ä¸­çš„æ–¹æ³•å';
+  is '±»¼ÇÂ¼µ½ÈÕÖ¾ÖĞµÄ·½·¨Ãû';
 comment on column SYS_LOGS.MSG
-  is 'æ—¥å¿—è¯¦ç»†ä¿¡æ¯';
+  is 'ÈÕÖ¾ÏêÏ¸ĞÅÏ¢';
 alter table SYS_LOGS
   add constraint PK_SYS_LOGS primary key (ID);
 
@@ -81,21 +81,21 @@ create table SYS_MENUS
 )
 ;
 comment on table SYS_MENUS
-  is 'èœå•ä¿¡æ¯';
+  is '²Ëµ¥ĞÅÏ¢';
 comment on column SYS_MENUS.ID
-  is 'èœå•åºå·ï¼Œä¸»é”®';
+  is '²Ëµ¥ĞòºÅ£¬Ö÷¼ü';
 comment on column SYS_MENUS.PARENT_ID
-  is 'çˆ¶çº§åºå·';
+  is '¸¸¼¶ĞòºÅ';
 comment on column SYS_MENUS.SEQ
-  is 'èœå•æ’åº';
+  is '²Ëµ¥ÅÅĞò';
 comment on column SYS_MENUS.NAME
-  is 'èœå•åç§°';
+  is '²Ëµ¥Ãû³Æ';
 comment on column SYS_MENUS.DESCN
-  is 'èœå•è¯´æ˜';
+  is '²Ëµ¥ËµÃ÷';
 comment on column SYS_MENUS.LINK_URL
-  is 'é“¾æ¥åœ°å€';
+  is 'Á´½ÓµØÖ·';
 comment on column SYS_MENUS.STATUS
-  is 'æ˜¯å¦å¯ç”¨';
+  is 'ÊÇ·ñ¿ÉÓÃ';
 alter table SYS_MENUS
   add constraint PK_SYS_MENUS primary key (ID);
 alter table SYS_MENUS
@@ -112,15 +112,15 @@ create table SYS_ROLES
 )
 ;
 comment on table SYS_ROLES
-  is 'è§’è‰²ä¿¡æ¯';
+  is '½ÇÉ«ĞÅÏ¢';
 comment on column SYS_ROLES.ID
-  is 'ç”¨æˆ·åºå·ï¼Œä¸»é”®';
+  is 'ÓÃ»§ĞòºÅ£¬Ö÷¼ü';
 comment on column SYS_ROLES.NAME
-  is 'è§’è‰²åç§°';
+  is '½ÇÉ«Ãû³Æ';
 comment on column SYS_ROLES.CODE
-  is 'è§’è‰²ç¼–å·';
+  is '½ÇÉ«±àºÅ';
 comment on column SYS_ROLES.DESCN
-  is 'è§’è‰²è¯´æ˜';
+  is '½ÇÉ«ËµÃ÷';
 alter table SYS_ROLES
   add constraint PK_SYS_ROLES primary key (ID);
 
@@ -132,11 +132,11 @@ create table SYS_MENU_ROLE
 )
 ;
 comment on table SYS_MENU_ROLE
-  is 'èœå•è§’è‰²å¯¹åº”è¡¨';
+  is '²Ëµ¥½ÇÉ«¶ÔÓ¦±í';
 comment on column SYS_MENU_ROLE.MENU_ID
-  is 'èœå•ç¼–å·';
+  is '²Ëµ¥±àºÅ';
 comment on column SYS_MENU_ROLE.ROLE_ID
-  is 'è§’è‰²ç¼–å·';
+  is '½ÇÉ«±àºÅ';
 alter table SYS_MENU_ROLE
   add constraint FK_SYS_MENUS_2 foreign key (MENU_ID)
   references SYS_MENUS (ID);
@@ -154,17 +154,17 @@ create table SYS_USERS
 )
 ;
 comment on table SYS_USERS
-  is 'ç³»ç»Ÿç”¨æˆ·ä¿¡æ¯';
+  is 'ÏµÍ³ÓÃ»§ĞÅÏ¢';
 comment on column SYS_USERS.ID
-  is 'ç³»ç»Ÿç”¨æˆ·åºå·ï¼Œä¸»é”®';
+  is 'ÏµÍ³ÓÃ»§ĞòºÅ£¬Ö÷¼ü';
 comment on column SYS_USERS.USERNAME
-  is 'ç”¨æˆ·ç™»å½•ç¼–å·';
+  is 'ÓÃ»§µÇÂ¼±àºÅ';
 comment on column SYS_USERS.PASSWORD
-  is 'ç”¨æˆ·å¯†ç ';
+  is 'ÓÃ»§ÃÜÂë';
 comment on column SYS_USERS.STATUS
-  is 'ç”¨æˆ·çŠ¶æ€ï¼Œå¯¹åº”ä»£ç è¡¨çš„CODE_IDå­—æ®µ';
+  is 'ÓÃ»§×´Ì¬£¬¶ÔÓ¦´úÂë±íµÄCODE_ID×Ö¶Î';
 comment on column SYS_USERS.PHOTO_PATH
-  is 'ç”¨æˆ·ç…§ç‰‡è·¯å¾„';
+  is 'ÓÃ»§ÕÕÆ¬Â·¾¶';
 alter table SYS_USERS
   add constraint PK_SYS_USERS primary key (ID);
 
@@ -176,11 +176,11 @@ create table SYS_USER_ROLE
 )
 ;
 comment on table SYS_USER_ROLE
-  is 'ç”¨æˆ·è§’è‰²å¯¹åº”è¡¨';
+  is 'ÓÃ»§½ÇÉ«¶ÔÓ¦±í';
 comment on column SYS_USER_ROLE.USER_ID
-  is 'ç”¨æˆ·ç¼–å·';
+  is 'ÓÃ»§±àºÅ';
 comment on column SYS_USER_ROLE.ROLE_ID
-  is 'è§’è‰²ç¼–å·';
+  is '½ÇÉ«±àºÅ';
 alter table SYS_USER_ROLE
   add constraint FK_SYS_ROLES_2 foreign key (ROLE_ID)
   references SYS_ROLES (ID);

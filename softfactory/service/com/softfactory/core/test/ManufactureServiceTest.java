@@ -84,6 +84,7 @@ public class ManufactureServiceTest {
 	  Integer pageno=(page-1)*rows;
 	  Integer pagesize=page*rows;
 	  Manufacture manufacture = new Manufacture();
+	  manufacture.setManufactureProcedureTag("S002-1");
 	  Pager<Manufacture>pager=manufactureService.findPassedMFG(pageno, pagesize, sort, order,manufacture);
 	  System.out.println(pager.getTotal());
 	  for(Manufacture procucts:pager.getRows()){

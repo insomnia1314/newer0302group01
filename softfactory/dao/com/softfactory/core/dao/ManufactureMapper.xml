@@ -63,6 +63,9 @@
 			<if test="manufacture.checkTag != null and manufacture.checkTag != ''">
 				and CHECK_TAG='S001-1'
 			</if>
+			<if test="manufacture.manufactureProcedureTag != null and manufacture.manufactureProcedureTag != ''">
+				and MANUFACTURE_PROCEDURE_TAG = #{manufacture.manufactureProcedureTag}
+			</if>
 		</where>
 	</sql>
 	

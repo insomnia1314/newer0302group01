@@ -56,7 +56,16 @@ public class MProcedureService {
 		return procedureMapper.findByFinishTag(finishTag);
 	}
 	
+	/**
+	 * 
+	 * @param pd
+	 * @return
+	 */
 	public int update(MProcedure pd){
 		return procedureMapper.update(pd);
+	}
+	
+	public int seachMaxDN(Integer parentId){
+		return procedureMapper.seachMaxDN(parentId);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -73,4 +74,15 @@ public interface MProcedureMapper {
 	@Update("update M_PROCEDURE set REAL_LABOUR_HOUR_AMOUNT=#{realModuleSubtotal} ,REAL_SUBTOTAL =#{realSubtotal},REAL_MODULE_SUBTOTAL=#{realModuleSubtotal},REAL_AMOUNT=#{realAmount}"
 			+ ",PROCEDURE_FINISH_TAG=#{procedureFinishTag},PROCEDURE_TRANSFER_TAG=#{procedureTransferTag} WHERE ID=#{id}")
 	int update(MProcedure pd);
+	
+	/**
+	 * 查询
+	 */
+	/**
+	 * 
+	 * @param parentId
+	 * @return
+	 */
+	@Select("select max(DETAILS_NUMBER) from M_PROCEDURE where PARENT_ID=#{parentId}")
+	int seachMaxDN(Integer parentId);
 }
