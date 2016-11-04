@@ -52,12 +52,6 @@
 						readonly="readonly" /></td>
 				</tr>
 				<tr>
-					<td>负责人</td>
-					<td><input id="procedureResponsiblePerson"
-						name="procedureResponsiblePerson" class="input"
-						required="required" /></td>
-				</tr>
-				<tr>
 					<td>设计工时数</td>
 					<td><input id="" name=""
 						value="${requestScope.mprocedure.labourHourAmount }" class="input"

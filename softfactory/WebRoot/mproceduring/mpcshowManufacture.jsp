@@ -694,10 +694,7 @@ BR {
 						if("G004-2"==finishTag){
 							return '请等待审核';
 						}
-						if("G004-1"==finishTag&&"G005-0"==finishTag){
-							return '<a href="#" class="" onclick="changeTransferTag(\''+id+'\')" >交接登记</a>';
-						}
-						if("G004-1"==finishTag&&"G004-1"==finishTag){
+						if("G004-3"==finishTag){
 							return '工序完成';
 						}
 					},

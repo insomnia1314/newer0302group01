@@ -81,9 +81,20 @@ public interface ManufactureMapper {
 	 */
 	long findPassedMFGTotal(@Param("manufacture") Manufacture manufacture);
 	
+	/**
+	 * 
+	 * @param pageno
+	 * @param pagesize
+	 * @param sort
+	 * @param order
+	 * @param manufacture
+	 * @return
+	 */
 	List<Manufacture> findByTag(@Param("pageno") Integer pageno, 
 			@Param("pagesize") Integer pagesize, 
 			@Param("sort") String sort,
 		    @Param("order") String order,
 		    @Param("manufacture") Manufacture manufacture);
+	
+	
 }

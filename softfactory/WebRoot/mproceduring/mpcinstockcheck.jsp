@@ -18,17 +18,20 @@
 <body>
 
 	<div style="margin: 10px 30px;">
-		<div id="editUser"></div>
+		
+		<div id="instockNumWindows" class="easyui-dialog" title="My Dialog" style="width:400px;height:200px;"   
+        data-options="iconCls:'icon-save',resizable:true,modal:true"></div>
 		<!-- 设定用户角色信息窗口 -->
 		<div id="userRole"></div>
-		<table id="mfgPasses">
+		<table id="mpcinstockrechek">
 		</table>
+		
 	</div>
 	<script type="text/javascript">
 		$(function() {
 			// 加载数据表格
-			$("#mfgPasses").datagrid({
-				url : "<%=request.getContextPath()%>/MProceduring/listPassedManufacture.do", //数据请求地址
+			$("#mpcinstockrechek").datagrid({
+				url : "<%=request.getContextPath()%>/MProcedureModuling/listrecheckerManufacture.do", //数据请求地址
 				title : "待生产工单", //标题
 				fitColumns : true, //真正的自动展开/收缩列的大小，以适应网格的宽度，防止水平滚动。
 				striped : true, //是否显示斑马线效果。
@@ -85,22 +88,13 @@
 					},
 					{
 						field : 'itemid',
-						title : '生产登记',
+						title : '入库审核',
 						width : 100,
 						align : 'center',
 						formatter : function(value, rowData, rowIndex) {
 							var id = rowData["id"];
-							var ProcedureTag = rowData["manufactureProcedureTag"];
-							var checkTag = rowData["checkTag"];
-							alert("ProcedureTag="+ProcedureTag);
-							alert("checkTag = "+checkTag);
-							if(ProcedureTag == "S002-1"){
-								return "工序完成,入库审核";
-							}
-							if( checkTag = "S001-1" && ProcedureTag == "S002-0" ){
-								return '<a href="#" class="reviewed" onclick="eviewed(\'' + id + '\')" ></a>';
-							}
-							
+							//alert("Id="+Id);
+							return '<a href="#" class="reviewed" onclick="instockCheck(\'' + id + '\')" >入库审核</a>';
 						},
 					},
 				] ],
@@ -111,12 +105,13 @@
 				sortOrder : "asc",
 				onLoadSuccess : function(data) {
 					$('.reviewed').linkbutton({
-						text : '开始生产',
+						text : '入库通知登记',
 						plain : true,
-						iconCls : 'icon-edit',
+						iconCls : 'icon-add',
 					});
 				}
 			});
+			
 		});
 	</script>
 </body>

@@ -1,6 +1,6 @@
 function eviewed(data) {
 	$("#divtabs").tabs("add", {
-		title : '审核页面',
+		title : '登记页面',
 		closable : true,
 		href : "MProceduring/showManufacture.do?id="+data
 	});
@@ -43,4 +43,11 @@ function recheck(data){
 }
 function changeTransferTag() {
 	$("#Myprocedure").alert("this changeTransferTag");
+}
+function instockCheck(data){
+	$('#instockNumWindows').window({
+	    title: '入库数量登记',    
+	    width: 400,    
+	    height: 200,
+	});  
 }

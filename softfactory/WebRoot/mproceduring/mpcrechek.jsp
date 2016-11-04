@@ -6,7 +6,7 @@
 			+ path + "/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
 <base href="<%=basePath%>">
@@ -74,16 +74,6 @@
 					<fmt:formatDate value="${mpDTO.registerTime}" pattern="yyyy-MM-dd"
 						var="rgsTime" />
 					<td><input type="text" value="${rgsTime}" /></td>
-				</tr>
-				<tr height="10px">
-					<td width="100px"></td>
-					<td>复核人</td>
-					<td><input type="text" value="${mpDTO.checker}" /></td>
-					<td width="400px"></td>
-					<td>复核时间</td>
-					<fmt:formatDate value="${mpDTO.checkTime}" pattern="yyyy-MM-dd"
-						var="checkerTime" />
-					<td><input type="text" value="${checkerTime}" /></td>
 				</tr>
 			</table>
 			<table id="rechekerTable">

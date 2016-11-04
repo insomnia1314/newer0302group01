@@ -91,4 +91,5 @@ public class ManufactureService {
 	public Manufacture findById(Integer id){
 		return manufactureMapper.findById(id);
 	}
+	
 }
